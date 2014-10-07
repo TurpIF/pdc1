@@ -7,6 +7,14 @@
 \usepackage{graphicx}
 \usepackage[frenchb]{babel}
 \usepackage[left=3cm, right=3cm]{geometry}
+\usepackage{titling}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
 
 % Headers & footers
 \usepackage{fancyhdr}
@@ -28,6 +36,7 @@
 \begin{document}
 
 \title{Plan d'assurance qualité}
+\subtitle{Dématérialisation d'un processus de paiement}
 \author{
   COMETS Jean-Marie \\
   DELMARRE Adrian \\
@@ -38,10 +47,59 @@
 
 \maketitle \newpage
 
-% \tableofcontents \newpage
+\tableofcontents \newpage
 
-% Introduction (5 pages)
-\section{Dossier d'initialisation}
+\section{Présentation du plan d'assurance qualité}
+\subsection{Présentation générale}
+Ce document représente la version préliminaire du Plan d'Assurance Qualité
+(PAQ). Il sera revu et complété au cours de la prestation des services
+effectués. \\
+
+En tant que version préliminaire, si des informations de ce document
+contredisent des éléments d'un document d'expression du besoin ou de
+présentation de solution, c'est ce dernier qui fait foi. \\
+
+Le présent document s'applique aux prestations confiées par Aventix dans le
+cadre du projet de conception \textit{"Dématérialisation d'un processus de
+paiement"}. \\
+
+\subsection{Objet du document}
+Le PAQ est l'engagement de Aventix quant à la politique d'assurance qualité
+applicable au projet.
+Il rappel également nos obligations envers Aventix sur le projet de conception.
+\\
+
+Le PAQ décrit:
+\begin{itemize}
+  \item La présentation générale du Plan d'Assurance Qualité.
+  \item Les documents à livrer dans le cadre de ce projet de conception.
+  \item La méthodologie applicable pour la réalisation des livrables.
+  \item Le processus de gestion de la qualité.
+  \item Le glossaire des principaux termes, expressions et abbréviations
+    métiers utilisées
+\end{itemize}
+
+\section{Documents à livrer dans le cadre du projet de conception}
+La liste des livrables brièvement décrite est fourni dans le document
+d'initialisation du projet. \\
+
+Voici un rappel des documents applicables :
+\begin{itemize}
+  \item Dossier d'initialisation
+  \item Expression des besoins
+  \item Description des solutions
+  \item Business plan
+\end{itemize}
+
+\subsection{Dossier d'initialisation}
+Le dossier d'initialisation est un document rappelant le contexte et l'objet du
+projet de conception suivi.
+Ce dernier établie également la liste des livrables ainsi qu'une description
+schématisé et textuelle de l'organisation de l'équipe dans la gestions des
+tâches.
+Enfin, une analyse de risques simplifié est faite pour évaluer la cohérence du
+projet.
+
 Plan :
   \\ Contexte et objet du projet
     \\ Rappeler le contexte du projet, de l'entreprise. Le milieu dans lequel elle
@@ -59,7 +117,7 @@ Plan :
     gestion projet, livrable, contenu, retard, respect des attentes, respect de
     la charte, du fonctionnement, qualité, tout ça quoi).
 
-\section{Expression des besoins}
+\subsection{Expression des besoins}
 Description des attentes du client
 \\ Listing point par point des problèmes et contraintes demandés par le client.
 \textbf{important}
@@ -74,7 +132,7 @@ Description des attentes du client
   \\ Description de ce qui est compris et ce qu'on déduit de ses attentes.
   \\ Description point par point comparé à ce qu'on va réellement faire.
 
-\section{Description des solutions}
+\subsection{Descriptions des solutions}
 Architecture applicative
 \\ Architecture technique
   \\ Stockage
@@ -90,14 +148,42 @@ Architecture applicative
   \\ Comparaison de la solution envisagé par rapport aux autres solutions de
   \\ paiements et leur interconnexion avec un SI.
 
-\section{Business plan}
+\subsection{Business plan}
 Produit service
-Etude du marché
-Plan marketing
-Plan d'opération
-Stratégie de sortie
-Evaluation des couts
-Analyse des risques
+\\ Etude du marché
+\\ Plan marketing
+\\ Plan d'opération
+\\ Stratégie de sortie
+\\ Evaluation des couts
+\\ Analyse des risques
+
+\section{Méthodologie de réalisation}
+\subsection{Réunion de travail}
+Afin d'avoir un comportement agile dans l'élaboration des prestations, l'équipe
+entière doit au moins se réunir une fois par semaine.
+Cette réunion permet à chacun d'échanger son avancée aux autres afin de
+vérifier et de corriger le planning prévisionnel établi pour le projet. \\
+
+Cette agilité de travail nous permet d'établir une politique d'organisation scrum.
+La gestion de projet se fait donc plus facilement en découpant les travaux à
+effectuer en \textit{sprint} dynamique qui peuvent être modifiés d'une réunion
+à une autre afin de se préparer en cas de retard, voir d'avance de la
+prestation. \\
+
+Il est également convenu que nous ayons un face à face avec le prestataire
+Aventix une fois par semaine les mercredis. Cela permet d'avoir de montrer son
+engagement et la qualité de la prestation tout en recevant un retour direct
+pour clarifier l'expression du besoin et l'établissement d'une solution
+technique ainsi qu'un business plan. \\
+
+\subsection{Maîtrise des livrables}
+\subsubsection{Format des livrables}
+
+\subsubsection{Remise des livrables}
+
+\subsection{Maîtrise des risques}
+
+\section{Gestion de la qualité}
 
 \section{Glossaire}
 
