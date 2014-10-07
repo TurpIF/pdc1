@@ -33,7 +33,7 @@
 \fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
 \fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
 \fancyhead[CO]{\fancyplain{}{}}
-\fancyhead[RO]{\fancyplain{}{}}
+\fancyhead[RO]{\fancyplain{}{\thetitle}}
 \fancyfoot[LE]{\fancyplain{}{}}
 \fancyfoot[CE]{\fancyplain{}{}}
 \fancyfoot[RE]{\fancyplain{}{}}
@@ -102,70 +102,78 @@ Voici un rappel des documents applicables :
 
 \subsection{Dossier d'initialisation}
 Le dossier d'initialisation est un document rappelant le contexte et l'objet du
-projet de conception suivi.
+projet de conception suivi. \\
 
 Ce dernier établie également la liste des livrables ainsi qu'une description
 schématisé et textuelle de l'organisation de l'équipe dans la gestions des
-tâches.
+tâches. \\
 Enfin, une analyse de risques simplifié est faite pour évaluer la cohérence du
-projet.
+projet. \\
 
-Plan :
-  \\ Contexte et objet du projet
+\begin{enumerate}
+  \item Contexte et objet du projet
     \\ Rappeler le contexte du projet, de l'entreprise. Le milieu dans lequel elle
     évolue, les concurrents.
     \\ On montre les solutions envisagés pour répondre aux besoin (expression des
     besoins très courte).
-  \\ Description des livrables
+  \item Description des livrables
     \\ Chaque livrable avec une description courte de son contenu
-  \\ Gestion des tâches
+  \item Gestion des tâches
     \\ Fonctionnement des tâches et gestion de l'équipe au sein du projet.
-  \\ Organisation de l'équipe
+  \item Organisation de l'équipe
     \\ Listing des membres de l'équipe et de leur qualification.
-  \\ Analyse des risques
+  \item Analyse des risques
     \\ Analyse des risques aux sein du projet (qu'est-ce qu'il y a comme risque :
     gestion projet, livrable, contenu, retard, respect des attentes, respect de
     la charte, du fonctionnement, qualité, tout ça quoi).
+\end{enumerate}
+
+\subsection{Etude comparative (Benchmarking)}
+Comparaison de la solution envisagé par rapport aux autres solutions de
+paiements et leur interconnexion avec un SI.
 
 \subsection{Expression des besoins}
-Description des attentes du client
-\\ Listing point par point des problèmes et contraintes demandés par le client.
-\textbf{important}
-\\ On dit ce que le client il veut.
-\\ Ce qu'il veut faire.
-\\ Ses attentes.
-  \\ Ce qu'il a envisagé de faire
-  \\ La solution bete
-\\ Ses contraintes.
-  \\ Son budget, le marché existant, concurrence
-\\ Description de ce qu'on va faire.
-  \\ Description de ce qui est compris et ce qu'on déduit de ses attentes.
-  \\ Description point par point comparé à ce qu'on va réellement faire.
+\begin{enumerate}
+  \item Description des attentes du client
+  \item Listing point par point des problèmes et contraintes demandés par le
+    client. \textbf{important}
+  % On dit ce que le client il veut.
+  % Ce qu'il veut faire.
+  % Ses attentes.
+  % Ce qu'il a envisagé de faire
+  % La solution bete
+  % Ses contraintes.
+  % Son budget, le marché existant, concurrence
+  \item Description de ce qu'on va faire.
+    \\ Description de ce qui est compris et ce qu'on déduit de ses attentes.
+    \\ Description point par point comparé à ce qu'on va réellement faire.
+\end{enumerate}
 
-\subsection{Descriptions des solutions}
-Architecture applicative
-\\ Architecture technique
-  \\ Stockage
-  \\ Recherche
-  \\ Consultation
-  \\ Communication avec les partenaires et les employés
-  \\ Sécurité
-  \\ Disponibilité 24/24 7/7
-  \\ Création de services métiers facile
-  \\ SI évolutif et maintenable
-  \\ (Priviligier les offres cloud computing orienté service SOA)
-\\ Benchmarking
-  \\ Comparaison de la solution envisagé par rapport aux autres solutions de
-  \\ paiements et leur interconnexion avec un SI.
+\subsection{Architecture Applicative}
+
+\subsection{Architecture Technique}
+\begin{enumerate}
+  \item Stockage
+  \item Recherche
+  \item Consultation
+  \item Communication avec les partenaires et les employés
+  \item Sécurité
+  \item Disponibilité 24/24 7/7
+  \item Création de services métiers facile
+  \item SI évolutif et maintenable
+  \item (Priviligier les offres cloud computing orienté service SOA)
+\end{enumerate}
 
 \subsection{Business plan}
-Produit service
-\\ Etude du marché
-\\ Plan marketing
-\\ Plan d'opération
-\\ Stratégie de sortie
-\\ Evaluation des couts
-\\ Analyse des risques
+\begin{enumerate}
+  \item Produit service
+  \item Etude du marché
+  \item Plan marketing
+  \item Plan d'opération
+  \item Stratégie de sortie
+  \item Evaluation des couts
+  \item Analyse des risques
+\end{enumerate}
 
 \section{Méthodologie de réalisation}
 \subsection{Réunion de travail}
@@ -216,6 +224,22 @@ business plan et d'assurer la qualité des directives métiers de la part
 d'Aventix. \\
 
 \subsection{Maîtrise des risques}
+Les méthodologies assure une bonne maîtrise des différents risques possible
+durant l'étude du projet de conception. \\
+
+En effet, l'organisation de travail agile permet de correctement prévenir les
+risques d'écart du planning prévisionnel. Comme ce dernier est dynamique et
+peut être ajusté à chaque itération, le rythme de travail peut être modifié
+afin de s'en rapprocher le plus. Cela est valable pour les retards mais
+également pour les surplus de travail. \\
+
+Les revues et validations réguliers de la part d'Aventix permettent d'avoir un
+retour d'approbation et de contentement permettant de limiter fortement les
+risques de non satisfaction de la prestation fournie. \\
+
+Enfin, le simple suivi des règles de gestion de la qualité de ce document, qui
+sont approuvées par Aventix, empêche beaucoup de tomber dans le cas du
+paragraphe précédent. \\
 
 \section{Gestion de la qualité}
 La gestion de la qualité de la prestation est assurée par un suivi systématique
