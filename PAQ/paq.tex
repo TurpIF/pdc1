@@ -8,12 +8,21 @@
 \usepackage[frenchb]{babel}
 \usepackage[left=3cm, right=3cm]{geometry}
 \usepackage{titling}
+\usepackage{enumitem}
 
 \newcommand{\subtitle}[1]{%
   \posttitle{%
     \par\end{center}
     \begin{center}\large#1\end{center}
     \vskip0.5em}%
+}
+
+\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
+\setlist[description]{
+  style=multiline,
+  topsep=10pt,
+  leftmargin=5cm,
+  align=parright
 }
 
 % Headers & footers
@@ -211,5 +220,9 @@ d'Aventix. \\
 \section{Gestion de la qualité}
 
 \section{Glossaire}
+
+\begin{description}
+  \item[Expression] Description
+\end{description}
 
 \end{document}
