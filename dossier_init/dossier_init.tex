@@ -1,0 +1,91 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[frenchb]{babel}
+\usepackage[left=3cm, right=3cm]{geometry}
+\usepackage{titling}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+% Headers & footers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead[LE]{\fancyplain{}{}}
+\fancyhead[CE]{\fancyplain{}{}}
+\fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
+\fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
+\fancyhead[CO]{\fancyplain{}{}}
+\fancyhead[RO]{\fancyplain{}{}}
+\fancyfoot[LE]{\fancyplain{}{}}
+\fancyfoot[CE]{\fancyplain{}{}}
+\fancyfoot[RE]{\fancyplain{}{}}
+\fancyfoot[LO]{\fancyplain{}{}}
+\fancyfoot[CO]{\fancyplain{}{\bfseries\thepage}}
+\fancyfoot[RO]{\fancyplain{}{}}
+% \renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+\title{Dossier d'initialisation}
+\subtitle{Dématérialisation d'un processus de paiement}
+\author{
+  COMETS Jean-Marie \\
+  DELMARRE Adrian \\
+  REYNOLDS Nicolas \\
+  TURPIN Pierre
+}
+\date{\today}
+
+\maketitle \newpage
+
+\tableofcontents \newpage
+
+\section{Contexte et objet du projet} % TODO
+Établir une offre technico-commerciale de solution de ticket restaurant
+numérique, proposant les points suivants :
+\begin{itemize}
+  \item introduire des caisses rapides en grande surface permettant à au client
+    d’éviter une longue attente en prenant son repas de midi
+  \item automatiser le paiement des tickets restaurants par l’entreprise ainsi
+    que la distribution des tickets restaurants
+\end{itemize}
+
+Cette offre sera surtout fournie d’un business plan détaillé pour appuyer
+l’intérêt de l’offre. \\
+
+\section{Description des livrables}
+\begin{description}
+  \item[Dossier d’initialisation] ce document, fourni dès l’entame du projet
+  \item[Expression des besoins] description de la solution demandée et mise en
+    rapport avec la solution envisagée
+  \item[Description des solutions] architecture applicative et technique, ainsi
+    que benchmarking des solution de paiement et de leur interconnexion avec un
+    SI
+  \item[Business plan] définition des objectifs, description de l’organisation
+    existante et des moyens à mettre en oeuvre pour atteindre les objectifs
+    fixés
+% Glossaire fourni séparément avec définition des termes métier employés dans l’ensemble des livrables. FIXME Finalement le glossaire est inclu dans le PAQ
+\end{description}
+
+\section{Gestion des tâches}
+
+\section{Organisation de l’équipe}
+\begin{itemize}
+  \item Jean-Marie Comets (chef de projet)
+  \item Pierre Turpin (responsable qualité)
+  \item Adrian Delmarre
+  \item Nicolas Reynolds
+\end{itemize}
+
+\section{Analyse des risques}
+
+\end{document}
