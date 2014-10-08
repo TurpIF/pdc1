@@ -1,65 +1,12 @@
-\documentclass[11pt, a4paper]{article}
-
-\usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage[frenchb]{babel}
-\usepackage[left=3cm, right=3cm]{geometry}
-\usepackage{titling}
-\usepackage{enumitem}
-
-\newcommand{\subtitle}[1]{%
-  \posttitle{%
-    \par\end{center}
-    \begin{center}\large#1\end{center}
-    \vskip0.5em}%
-}
-
-\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
-\setlist[description]{
-  style=multiline,
-  topsep=10pt,
-  leftmargin=5cm,
-  align=parright
-}
-
-% Headers & footers
-\usepackage{fancyhdr}
-\pagestyle{fancyplain}
-\fancyhead[LE]{\fancyplain{}{}}
-\fancyhead[CE]{\fancyplain{}{}}
-\fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
-\fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
-\fancyhead[CO]{\fancyplain{}{}}
-\fancyhead[RO]{\fancyplain{}{\thetitle}}
-\fancyfoot[LE]{\fancyplain{}{}}
-\fancyfoot[CE]{\fancyplain{}{}}
-\fancyfoot[RE]{\fancyplain{}{}}
-\fancyfoot[LO]{\fancyplain{}{}}
-\fancyfoot[CO]{\fancyplain{}{\bfseries\thepage}}
-\fancyfoot[RO]{\fancyplain{}{}}
-% \renewcommand{\footrulewidth}{0.4pt}
+\input{../header}
 
 \begin{document}
 
-\title{Plan d'assurance qualité}
-\subtitle{Dématérialisation d'un processus de paiement}
-\author{
-  COMETS Jean-Marie \\
-  DELMARRE Adrian \\
-  REYNOLDS Nicolas \\
-  TURPIN Pierre
-}
-\date{\today}
-
-\maketitle \newpage
-
-\tableofcontents \newpage
+\Document{Plan d'assurance qualité}
 
 \section{Présentation du plan d'assurance qualité}
 \subsection{Présentation générale}
+% TODO modifier cette section à chaque nouveau livrable
 Ce document représente la version préliminaire du Plan d'Assurance Qualité
 (PAQ). Il sera revu et complété au cours de la prestation des services
 effectués. \\
@@ -75,10 +22,10 @@ paiement"}. \\
 \subsection{Objet du document}
 Le PAQ est l'engagement de Aventix quant à la politique d'assurance qualité
 applicable au projet.
-Il rappel également nos obligations envers Aventix sur le projet de conception.
+Il rappelle également nos obligations envers Aventix sur le projet de conception.
 \\
 
-Le PAQ décrit:
+Le PAQ décrit :
 \begin{itemize}
   \item La présentation générale du Plan d'Assurance Qualité.
   \item Les documents à livrer dans le cadre de ce projet de conception.
@@ -89,14 +36,15 @@ Le PAQ décrit:
 \end{itemize}
 
 \section{Documents à livrer dans le cadre du projet de conception}
-La liste des livrables brièvement décrite est fourni dans le document
+La liste des livrables brièvement décrite est fournie dans le document
 d'initialisation du projet. \\
 
 Voici un rappel des documents applicables :
 \begin{itemize}
   \item Dossier d'initialisation
   \item Expression des besoins
-  \item Description des solutions
+  \item Architecture applicative
+  \item Architecture technique
   \item Business plan
 \end{itemize}
 
@@ -104,32 +52,30 @@ Voici un rappel des documents applicables :
 Le dossier d'initialisation est un document rappelant le contexte et l'objet du
 projet de conception suivi. \\
 
-Ce dernier établie également la liste des livrables ainsi qu'une description
-schématisé et textuelle de l'organisation de l'équipe dans la gestions des
+Ce dernier établi également la liste des livrables ainsi qu'une description
+schématisée et textuelle de l'organisation de l'équipe dans la gestion des
 tâches. \\
-Enfin, une analyse de risques simplifié est faite pour évaluer la cohérence du
+Enfin, une analyse de risques simplifiée est faite pour évaluer la cohérence du
 projet. \\
 
-\begin{enumerate}
-  \item Contexte et objet du projet
-    \\ Rappeler le contexte du projet, de l'entreprise. Le milieu dans lequel elle
-    évolue, les concurrents.
-    \\ On montre les solutions envisagés pour répondre aux besoin (expression des
-    besoins très courte).
-  \item Description des livrables
-    \\ Chaque livrable avec une description courte de son contenu
-  \item Gestion des tâches
-    \\ Fonctionnement des tâches et gestion de l'équipe au sein du projet.
-  \item Organisation de l'équipe
-    \\ Listing des membres de l'équipe et de leur qualification.
-  \item Analyse des risques
-    \\ Analyse des risques aux sein du projet (qu'est-ce qu'il y a comme risque :
-    gestion projet, livrable, contenu, retard, respect des attentes, respect de
-    la charte, du fonctionnement, qualité, tout ça quoi).
-\end{enumerate}
+\begin{description}
+  \item[Contexte et objet du projet] Rappel du contexte du projet, de
+    l'entreprise, le milieu dans lequel elle évolue, les concurrents.
+    Solutions envisagées pour répondre aux besoins (expression des besoins
+    très courte).
+  \item[Description des livrables] Chaque livrable avec une description courte
+    de son contenu.
+  \item[Gestion des tâches] Fonctionnement des tâches et gestion de l'équipe au
+    sein du projet.
+  \item[Organisation de l'équipe] Listing des membres de l'équipe et de leur
+    qualification.
+  \item[Analyse des risques] Analyse des risques aux sein du projet (gestion
+    projet, livrable, contenu, retard, respect des attentes, respect de
+    la charte, du fonctionnement, qualité).
+\end{description}
 
-\subsection{Etude comparative (Benchmarking)}
-Comparaison de la solution envisagé par rapport aux autres solutions de
+\subsection{Étude comparative (Benchmarking)}
+Comparaison de la solution envisagée par rapport aux autres solutions de
 paiements et leur interconnexion avec un SI.
 
 \subsection{Expression des besoins}
@@ -144,12 +90,15 @@ paiements et leur interconnexion avec un SI.
   % La solution bete
   % Ses contraintes.
   % Son budget, le marché existant, concurrence
-  \item Description de ce qu'on va faire.
-    \\ Description de ce qui est compris et ce qu'on déduit de ses attentes.
-    \\ Description point par point comparé à ce qu'on va réellement faire.
+  \item Description des solutions envisagées.
+    \\ Attentes déduites des demandes du client.
+    \\ Mise en rapport point par point des attentes avec ce qui va être
+    effectué.
 \end{enumerate}
 
 \subsection{Architecture Applicative}
+
+% TODO remplir cette section
 
 \subsection{Architecture Technique}
 \begin{enumerate}
@@ -161,38 +110,37 @@ paiements et leur interconnexion avec un SI.
   \item Disponibilité 24/24 7/7
   \item Création de services métiers facile
   \item SI évolutif et maintenable
-  \item (Priviligier les offres cloud computing orienté service SOA)
+  \item (Privilégier les offres cloud computing orienté service SOA)
 \end{enumerate}
 
 \subsection{Business plan}
 \begin{enumerate}
   \item Produit service
-  \item Etude du marché
+  \item Étude du marché
   \item Plan marketing
   \item Plan d'opération
   \item Stratégie de sortie
-  \item Evaluation des couts
+  \item Évaluation des couts
   \item Analyse des risques
 \end{enumerate}
 
 \section{Méthodologie de réalisation}
 \subsection{Réunion de travail}
 Afin d'avoir un comportement agile dans l'élaboration des prestations, l'équipe
-entière doit au moins se réunir une fois par semaine.
-Cette réunion permet à chacun d'échanger son avancée aux autres afin de
-vérifier et de corriger le planning prévisionnel établi pour le projet. \\
+entière doit se réunir au moins une fois par semaine. Cette réunion permet à
+chacun d'échanger son avancée aux autres afin de vérifier et de corriger le
+planning prévisionnel établi pour le projet. \\
 
-Cette agilité de travail nous permet d'établir une politique d'organisation scrum.
-La gestion de projet se fait donc plus facilement en découpant les travaux à
-effectuer en \textit{sprint} dynamique qui peuvent être modifiés d'une réunion
-à une autre afin de se préparer en cas de retard, voir d'avance de la
-prestation. \\
+Cette agilité de travail nous permet d'établir une politique d'organisation
+scrum. La gestion de projet se fait donc plus facilement en découpant les
+travaux à effectuer en \textit{sprints} dynamiques qui peuvent être modifiés
+d'une réunion à une autre afin réagir à une situation de retard, voire d'avance
+de la prestation. \\
 
-Il est également convenu que nous ayons un face à face avec le prestataire
-Aventix une fois par semaine les mercredis sur rendez-vous. Cela permet d'avoir
-de montrer son engagement et la qualité de la prestation tout en recevant un
-retour direct pour clarifier l'expression du besoin et l'établissement d'une
-solution technique ainsi qu'un business plan. \\
+Un face-à-face hebdomadaire est également prévu avec le prestataire Aventix.
+Cela permettra de démontrer notre engagement et la qualité de la prestation
+tout en recevant un retour direct pour clarifier l'expression des besoins et
+l'établissement d'une solution technique ainsi qu'un business plan. \\
 
 \subsection{Maîtrise des livrables}
 \subsubsection{Format des livrables}
@@ -201,27 +149,27 @@ solution technique ainsi qu'un business plan. \\
 La remise des livrables au client Aventix se fera au fur et à mesure de l'étude
 de la conception. \\
 
-Le mercredi 15 octobre 2014, le dossier d'initialisation sera transmis.
+Le \textbf{mercredi 15 octobre 2014}, le dossier d'initialisation sera transmis.
 Une étude comparative sur les lecteurs de cartes à puce et leur interconnexion
 avec un système d'information sera également donnée pour établir et justifier
 notre choix de conception sur les architectures applicative et technique
-choisies comme solution. \\
+choisies. \\
 
-Le mercredi 22 octobre 2014, le dossier d'architecture applicative sera rendu
+Le \textbf{mercredi 22 octobre 2014}, le dossier d'architecture applicative sera rendu
 et validé. \\
 
-Le mercredi 5 novembre 2014, le dossier d'architecture technique sera délivré.
+Le \textbf{mercredi 5 novembre 2014}, le dossier d'architecture technique sera délivré.
 Un document expliquant la solution EDI choisie pour l'échange avec la banque
 sera également remis. \\
 
-Le business plan sera donné au plus tard le mercredi 19 novembre 2014. \\
+Le business plan sera donné au plus tard le \textbf{mercredi 19 novembre 2014}. \\
 
-Une revue finale avec Aventix sera dispensée entre le mercredi 5 novembre 2014
-et le mercredi 19 novembre sur rendez-vous et accord des deux parties.
-Cette réunion d'explication nous permettra d'expliquer la démarche effectué et
-la solution choisie durant la prestation afin d'améliorer la prise en main du
-business plan et d'assurer la qualité des directives métiers de la part
-d'Aventix. \\
+Une revue finale avec Aventix sera dispensée entre le \textbf{mercredi 5
+  novembre} et le \textbf{mercredi 19 novembre} 2014 sur rendez-vous et accord
+des deux parties.  Cette réunion d'explication nous permettra d'expliquer la
+démarche effectué et la solution choisie durant la prestation afin d'améliorer
+la prise en main du business plan et d'assurer la qualité des directives
+métiers de la part d'Aventix. \\
 
 \subsection{Maîtrise des risques}
 Les méthodologies assure une bonne maîtrise des différents risques possible
@@ -233,26 +181,26 @@ peut être ajusté à chaque itération, le rythme de travail peut être modifi�
 afin de s'en rapprocher le plus. Cela est valable pour les retards mais
 également pour les surplus de travail. \\
 
-Les revues et validations réguliers de la part d'Aventix permettent d'avoir un
-retour d'approbation et de contentement permettant de limiter fortement les
-risques de non satisfaction de la prestation fournie. \\
+Les revues et validations régulières de la part d'Aventix permettent d'avoir un
+retour d'approbation et de contentement, limitant les risques de non
+satisfaction de la prestation fournie. \\
 
 Enfin, le simple suivi des règles de gestion de la qualité de ce document, qui
-sont approuvées par Aventix, empêche beaucoup de tomber dans le cas du
-paragraphe précédent. \\
+sont approuvées par Aventix, empêchent tomber dans le cas du paragraphe
+précédent. \\
 
 \section{Gestion de la qualité}
 La gestion de la qualité de la prestation est assurée par un suivi systématique
-de ce doument ainsi que grâce à la méthodologie de travail de l'équipe. \\
+de ce document ainsi que grâce à la méthodologie de travail de l'équipe. \\
 
-De plus, le processus d'écriture de livrables requiert la relecture par le
+De plus, le processus d'écriture des livrables requiert la relecture par le
 responsable qualité de l'équipe. Cette phase de correction permet, en plus
 d'avoir un document propre, de gérer correctement la cohérence entre les
 différents documents. \\
 
 Les termes métiers utilisés dans les documents sont alors répertoriés dans le
 glossaire et unifiés à travers tous les documents. \\
-Egalement les documents doivent remplir les conditions de qualité attendu
+Également les documents doivent remplir les conditions de qualité attendu
 spécifié dans ce document. \\
 
 Dans le cas d'un non-respect grave des attentes, le document est redistribué à
@@ -263,8 +211,8 @@ pour valider définitivement le document. \\
 
 \section{Glossaire}
 
-\begin{description}
-  \item[Expression] Description...
-\end{description}
+% TODO remplir cette section
 
 \end{document}
+
+% vim: ft=tex et sw=2 sts=2

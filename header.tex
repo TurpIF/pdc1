@@ -1,0 +1,59 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[frenchb]{babel}
+\usepackage[left=3cm, right=3cm]{geometry}
+\usepackage{titling}
+\usepackage{enumitem}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
+\setlist[description]{
+  style=multiline,
+  topsep=10pt,
+  leftmargin=5cm,
+  align=parright
+}
+
+% Headers & footers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead[LE]{\fancyplain{}{}}
+\fancyhead[CE]{\fancyplain{}{}}
+\fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
+\fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
+\fancyhead[CO]{\fancyplain{}{}}
+\fancyhead[RO]{\fancyplain{}{\thetitle}}
+\fancyfoot[LE]{\fancyplain{}{}}
+\fancyfoot[CE]{\fancyplain{}{}}
+\fancyfoot[RE]{\fancyplain{}{}}
+\fancyfoot[LO]{\fancyplain{}{}}
+\fancyfoot[CO]{\fancyplain{}{\bfseries\thepage}}
+\fancyfoot[RO]{\fancyplain{}{}}
+% \renewcommand{\footrulewidth}{0.4pt}
+
+\newcommand{\Document}[1]{%
+    \title{#1}
+    \subtitle{Dématérialisation d'un processus de paiement}
+    \author{
+        COMETS Jean-Marie \\
+        DELMARRE Adrian \\
+        REYNOLDS Nicolas \\
+        TURPIN Pierre
+    }
+    \date{\today}
+
+    \maketitle \newpage
+
+    \tableofcontents \newpage
+}
