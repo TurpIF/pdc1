@@ -1,62 +1,8 @@
-\documentclass[11pt, a4paper]{article}
-
-\usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage[frenchb]{babel}
-\usepackage[left=3cm, right=3cm]{geometry}
-\usepackage{titling}
-\usepackage{enumitem}
-
-\newcommand{\subtitle}[1]{%
-  \posttitle{%
-    \par\end{center}
-    \begin{center}\large#1\end{center}
-    \vskip0.5em}%
-}
-
-\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
-\setlist[description]{
-  style=multiline,
-  topsep=10pt,
-  leftmargin=5cm,
-  align=parright
-}
-
-% Headers & footers
-\usepackage{fancyhdr}
-\pagestyle{fancyplain}
-\fancyhead[LE]{\fancyplain{}{}}
-\fancyhead[CE]{\fancyplain{}{}}
-\fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
-\fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
-\fancyhead[CO]{\fancyplain{}{}}
-\fancyhead[RO]{\fancyplain{}{}}
-\fancyfoot[LE]{\fancyplain{}{}}
-\fancyfoot[CE]{\fancyplain{}{}}
-\fancyfoot[RE]{\fancyplain{}{}}
-\fancyfoot[LO]{\fancyplain{}{}}
-\fancyfoot[CO]{\fancyplain{}{\bfseries\thepage}}
-\fancyfoot[RO]{\fancyplain{}{}}
-% \renewcommand{\footrulewidth}{0.4pt}
+\input{../header}
 
 \begin{document}
 
-\title{Dossier d'initialisation}
-\subtitle{Dématérialisation d'un processus de paiement}
-\author{
-  COMETS Jean-Marie \\
-  DELMARRE Adrian \\
-  REYNOLDS Nicolas \\
-  TURPIN Pierre
-}
-\date{\today}
-
-\maketitle \newpage
-
-\tableofcontents \newpage
+\Document{Dossier d'initialisation}
 
 \section{Contexte et objet du projet} % TODO
 Établir une offre technico-commerciale de solution de ticket restaurant
@@ -74,25 +20,70 @@ l'intérêt de l'offre. \\
 \section{Description des livrables}
 \begin{description}
     \item[Dossier d'initialisation] ce document, fourni dès l'entame du projet.
+    \item[Plan d'Assurance Qualité (PAQ)] rendu avec chaque nouveau rendu de
+        livrable, relatant la structure détaillée des livrables ainsi que les
+        méthodes employés pour garantir leur qualité. Un glossaire est
+        notamment inclus pour assurer la bonne compréhension des documents.
+        Chaque nouvelle modification impacte les nouveaux livrables ou
+        exceptionnellement ceux qui ont dû être modifiés après vérification de
+        la part du client.
     \item[Expression des besoins] description de la solution demandée et mise en
-        rapport avec la solution envisagée.
-    \item[Description des solutions] architecture applicative et technique, ainsi
-        que benchmarking des solution de paiement et de leur interconnexion avec un
-        SI.
+        rapport avec la solution envisagée, ainsi que benchmarking des solution
+        de paiement et de leur interconnexion avec un SI.
+    \item[Architecture applicative] urbanisation du SI et architecture des services mis en jeu.
+    \item[Architecture technique] moyens techniques envisagés pour le déploiement de la solution.
     \item[Business plan] définition des objectifs, description de l'organisation
         existante et des moyens à mettre en oeuvre pour atteindre les objectifs
         fixés.
 \end{description}
 
-\section{Gestion des tâches} % TODO
+\section{Gestion de projet}
+
+La gestion de projet sera basée sur un modèle agile, avec des \textit{sprints}
+d'une semaine. Chaque semaine, une réunion d'équipe est prévue, avec le
+planning suivant :
+
+\begin{enumerate}
+    \item Bilan de la semaine passée, avancement actuel de chacun
+    \item Risques déduits de l'avancement
+    \item Remarques variées sur l'état des livrables déjà produits,
+        propositions d'améliorations
+    \item Définition des tâches à effectuer pour la semaine à venir
+    \item Pré-attribution en rapport avec les anciennes responsabilités de
+        chacun
+    \item Notation collaborative des tâches par difficulté (chacun note
+        séparément, puis moyenne des notes)
+    \item Ré-attribution des tâches pour équilibrer la charge de travail
+        (basculement des responsabilités)
+    \item Réflexion d'équipe sur les tâches les plus difficiles (une voire deux
+        en fonction du temps disponible)
+\end{enumerate}
+
+En cas de force majeure rendant indisponible un membre de l'équipe, une réunion
+exceptionnelle peut être planifiée pour redistribuer les tâches de ce dernier.
 
 \section{Organisation de l'équipe}
+
+L'organisation hiérarchique de l'équipe est détaillée dans la figure
+\ref{fig:hierarchie}, mais peut être résumée comme ceci :
+
 \begin{itemize}
     \item Jean-Marie Comets (chef de projet)
     \item Pierre Turpin (responsable qualité)
     \item Adrian Delmarre
     \item Nicolas Reynolds
 \end{itemize}
+
+L'ensemble des membres de l'équipe sont en dernière année de formation d'école
+d'ingénieurs à l'INSA de Lyon. C'est une équipe motivée et passionnée
+d'innovation.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{hierarchie}
+    \caption{Hiérarchie de l'équipe}
+    \label{fig:hierarchie}
+\end{figure}
 
 \section{Analyse des risques}
 
