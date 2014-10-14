@@ -1,11 +1,194 @@
 \input{../header}
+\usepackage{wrapfig}
 \begin{document}
 
 \Document{Expression des besoins}
 
-\section{Analyse des besoins exprimés}
+\section{Objet du projet}
 
-\section{Spécification des besoins déduits}
+Forte d'une vision particulière et d'une expertise avancée en matière de
+transactions sécurisées et ergonomiques, l'entreprise AVENTIX se propose de
+concurrencer SODEXHO dans un des domaines qui en ont fait la renommée, en
+remplaçant les traditionnels chèques restaurant par des puces NFC. Hormis
+l'aspect simple, moderne et ludique du produit, qui semble séduire le
+consommateur final d'après les premières études du marché, c'est surtout sur la
+simplification drastique du workflow de paiement, de par sa dématérialisation,
+qu'AVENTIX compte pour convaincre les différents acteurs du secteur.
 
+L'objectif de ce projet est de spécifier le système proposé par AVENTIX dans le
+cadre d'une étude préliminaire.
+
+\section{Contexte du projet}
+
+Au jour d'aujourd'hui, la chaîne de traitement des chèques restaurant fait
+intervenir cinq acteurs: une société qui émet les chèques restaurant,
+l'employeur qui achète les chèques pour les céder aux employés en prenant à sa
+charge une partie de valeur indiquée, l'employé qui utilise le chèque et enfin
+le commerçant affilié auprès d'une centrale de règlement des titres (CRT). Le
+traitement des chèques restaurant est semi-automatique car il nécessite
+l'envoi des chèques par les commerçants à la centrale de règlement des titres.
+A ce niveau, les chèques sont traités de façon informatique afin de permettre
+aux commerçants d'être crédités.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{cdu1}
+    \label{fig:cdu1}
+\end{figure}
+
+Pour supprimer la partie manuelle dans la chaîne de traitement des chèques
+restaurant au profit d'un traitement entièrement automatique, on souhaite
+remplacer le chèque par une puce NFC sans que cela modifie, sur le plan de
+l'organisation, les procédures d'acquisition et de traitement déjà utilisées.
+On nommera ce nouveau mode : carte restaurant. Ainsi, on envisage une
+simplification des protocoles d'acquisition et d'utilisation.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{cdu2}
+    \label{fig:cdu2}
+\end{figure}
+
+\section{Acteurs}
+
+\subsection{Acteurs externes}
+
+\begin{description}
+    \item[Banques] Cet acteur représente les enseignes bancaires garantissant
+        la sécurité des transactions (terminaux et internet) et leurs
+        échéances.
+    \item[Fournisseurs] Cet acteur représente les entreprises fabricant ou
+        important les bornes NFC mises en place chez les commerçants
+        partenaires.
+    \item[Installateurs / maintenance] Cet acteur représente les artisans
+        accrédités responsables de la mise en place des bornes NFC chez les
+        commerçants partenaires, ainsi que des opérations de maintenance.
+    \item[Commerçants] Cet acteur représente les enseignes (restaurants et
+        grandes surfaces) qui acceptent la puce NFC comme moyen de paiement
+        d'une prestation.
+    \item[Entreprise] Cet acteur représente les employeurs qui adhèrent à la
+        puce NFC. Il interagit avec le système dans le cadre du processus de
+        gestion de commande et du processus de livraison-facturation.
+    \item[Borne NFC] Cet acteur modélise un lecteur de puce NFC installé chez
+        un commerçant et qui permet de transmettre les données relatives à une
+        transaction commerciale.
+    \item[Utilisateur final] Cet acteur modélise le client final de la solution
+        B2B2C, l'utilisateur de la puce NFC.
+\end{description}
+
+\subsection{Acteurs internes}
+
+\begin{description}
+    \item[Service commande] Correspond au poste de travail qui traite les
+        commandes (saisie, édition et envoi de bons de commande). Cet acteur
+        s'occupe également des devis.
+    \item[Service facturation] Correspond au poste de travail qui traite les
+        factures (élaboration des règles de facturation, édition et ennvoi des
+        factures). Cet acteur s'occupe également des expéditions de puces NFC à
+        destination des entreprises.
+    \item[Service traitement] Correspond au service chargé de surveiller le
+        traitement des transactions. Une transaction s'effectue entre un
+        commerçant et le système. Ce service est également chargé de mettre à
+        jour les données suite aux sollicitations des employeurs ou des
+        employés.
+    \item[Service marketing] Correspond au service responsable de la
+        prospection de nouveaux clients, quelle que soit leur nature, du
+        dimensionnement (nombre de bornes, etc.) et de l'établissement de
+        contrats.
+    \item[Service client] Correspond à l'interface entre les clients
+        (entreprises et commerçants), garant de la qualité des services
+        proposés et récipendaire des réclamations éventuelles.
+\end{description}
+
+\section{Besoins fonctionnels}
+
+\subsection{Attentes de gestion}
+
+\begin{itemize}
+    \item Traitement des commandes :
+        \begin{itemize}
+            \item De crédit (par le truchement de la banque)
+            \item D'installation de machines (par le truchement des
+                fournisseurs et installateurs)
+        \end{itemize}
+    \item Édition de factures
+\end{itemize}
+
+\subsection{Attentes métier}
+
+\begin{itemize}
+    \item Compensation (gestion des transactions) :
+        \begin{itemize}
+            \item Crédit d'un compte client.
+                \begin{itemize}
+                    \item Par l'entreprise.
+                    \item Par lui-même.
+                \end{itemize}
+            \item Débit d'un compte client.
+                \begin{itemize}
+                    \item Par un RIE / RE.
+                    \item Par une grande surface.
+                    \item Par un enseigne de restauration.
+                \end{itemize}
+            \item Crédit d'un compte commerçant.
+            \item Débit d'un compte commerçant.
+        \end{itemize}
+\end{itemize}
+
+\subsection{Attentes B2B/B2C}
+
+\begin{itemize}
+    \item Marketing :
+        \begin{itemize}
+            \item Étude de marché : pénétration d'un nouveau mode de transaction dans un marché fermé.
+                \begin{itemize}
+                    \item Auprès des entreprises, qui seraient susceptibles d'y recourir,
+                    \item Auprès des utilisateurs finaux, dont l'intérêt justifierait l'investissement pour l'entreprise.
+                \end{itemize}
+            \item Prospection commerciale : conclusion d'accords de principe // démarchage.
+                \begin{itemize}
+                    \item Auprès des entreprises,
+                    \item Auprès des grandes surfaces.
+                \end{itemize}
+        \end{itemize}
+    \item Mise en place d'une interface web destinée aux entreprises voulant adhérer au programme ou gérer leur compte.
+    \item Mise en place d'une interface web destinée aux utilisateurs finaux souhaitant gérer leur crédit.
+\end{itemize}
+
+\subsection{Attentes interopérabilité}
+
+\begin{itemize}
+    \item Mise en place d'une architecture modulaire et évolutive.
+    \item Respect des normes d'usage.
+    \item (rétro)compatibilité avec les systèmes existants.
+\end{itemize}
+
+\section{Cas d'utilisation}
+
+% TODO intégrer MCC/MOT
+
+
+\subsection{Attentes de gestion}
+\subsection{Attentes métier}
+\subsection{Attentes B2B/B2C}
+
+\begin{wrapfigure}{r}{0.55\textwidth}
+    \centering
+    \includegraphics[width=0.53\textwidth]{mot-prospection-clients}
+    \caption{Diagramme MOT pour le traitement "Prospection des clients"}
+    \label{fig:mot-prospection-clients}
+\end{wrapfigure}
+
+Avant toute démarche de prospection des clients directs, le service marketing
+aura déjà eu à sa disposition une \textbf{étude du marché} auprès des
+utilisateurs finaux afin d'avoir une confiance sur l'intérêt de la solution.
+Cette dernière étude devra être effectuée en dehors de l'étude ci-présente pour
+garantir sa pertinence. \\
+
+La prospection des clients devra bien sûr être faite spécifiquement en ciblant
+chaque client au mieux. Parmi les clients directs, les commerçants prospectés
+devront être choisis selon l'application de la solution à leur fonctionnement.
+Les commerçants concernés seront détaillés dans le document \textbf{Business
+plan}.
 
 \end{document}
