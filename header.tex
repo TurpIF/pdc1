@@ -9,12 +9,14 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 
-% Numérotation de page custom
+% Document "fancy"
 \usepackage{fancyhdr}
-\usepackage{lastpage}
 \pagestyle{fancy}
 \fancyhf{}
-\rfoot{Page \thepage \hspace{1pt} sur \pageref{LastPage}}
+
+% Gros en-têtes/pied de pages
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
 
 % Police Helvetica <3
 \usepackage{helvet}
@@ -35,10 +37,15 @@
     \vskip0.5em}%
 }
 
+% Nom du projet
+\def \DocumentProject {Dématérialisation d'un processus de paiement}
+
 % En tête complet de document
 \newcommand{\Document}[1]{%
-    \title{#1}
-    \subtitle{Dématérialisation d'un processus de paiement}
+    \def \DocumentTitle {#1}
+
+    \title{\DocumentTitle}
+    \subtitle{\DocumentProject}
     \author{
         COMETS Jean-Marie \\
         DELMARRE Adrian \\
@@ -51,3 +58,9 @@
 
     \tableofcontents \newpage
 }
+
+% Contenu des en-têtes/pied de pages
+\fancyhead[LE,RO]{\DocumentProject}
+\fancyhead[RE,LO]{\DocumentTitle}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[LE,RO]{\thepage}
