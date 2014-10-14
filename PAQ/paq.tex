@@ -58,6 +58,7 @@ tâches. \\
 Enfin, une analyse de risques simplifiée est faite pour évaluer la cohérence du
 projet. \\
 
+Le dossier d'initialisation rappelera les points suivants :
 \begin{description}
   \item[Contexte et objet du projet] Rappel du contexte du projet, de
     l'entreprise, le milieu dans lequel elle évolue, les concurrents.
@@ -79,22 +80,28 @@ Comparaison de la solution envisagée par rapport aux autres solutions de
 paiements et leur interconnexion avec un SI.
 
 \subsection{Expression des besoins}
+L'expression des besoins est une étude préliminaire sur laquelle notre étude
+technique va se baser. Il n'y aura pas d'étude de besoins postérieur prenant en
+compte les résultats et solutions finales. \\
+
+L'étude reprend les points suivants :
 \begin{enumerate}
-  \item Description des attentes du client
-  \item Listing point par point des problèmes et contraintes demandés par le
-    client. \textbf{important}
-  % On dit ce que le client il veut.
-  % Ce qu'il veut faire.
-  % Ses attentes.
-  % Ce qu'il a envisagé de faire
-  % La solution bete
-  % Ses contraintes.
-  % Son budget, le marché existant, concurrence
-  \item Description des solutions envisagées.
-    \\ Attentes déduites des demandes du client.
-    \\ Mise en rapport point par point des attentes avec ce qui va être
-    effectué.
+  \item Rappel contextuel de la conception
+  \item Description des objectifs du projet
+  \item Présentation des spécifications fonctionnelles
+    \begin{enumerate}
+      \item Listing des acteurs
+      \item Analyse des besoins fonctionnels
+      \item Expression des utilisations
+    \end{enumerate}
 \end{enumerate}
+
+\subsubsection{Rappel contextuel de la conception}
+\subsubsection{Description des objectifs du projet}
+\subsubsection{Présentation des spécifications fonctionnelles}
+\paragraph{Listing des acteurs}
+\paragraph{Analyse des besoins fonctionnels}
+\paragraph{Expression des utilisations}
 
 \subsection{Architecture Applicative}
 
@@ -144,6 +151,18 @@ l'établissement d'une solution technique ainsi qu'un business plan. \\
 
 \subsection{Maîtrise des livrables}
 \subsubsection{Format des livrables}
+La forme de tous les documents est globalement régie par un guide de style que
+nous avons spécifié en interne. \\
+Ce dernier n'est pas disponible en livrable pour Aventix. \\
+
+Dans le cas où un document impose des règles de forme particulière telles que
+des schémas, des illustrations, ..., ces dernières sont disponibles et
+spécifiées précédemment dans la présentation des livrables. \\
+
+Egalement dans les spécification des présentations des livrables, la forme et
+le structure de ceux-ci est fourni. Cela permet d'avoir des règles de
+structures détaillées, complètes et centralisées. La cohésion et l'intégrité du
+travail produit et alors certifié. \\
 
 \subsubsection{Remise des livrables}
 La remise des livrables au client Aventix se fera au fur et à mesure de l'étude
@@ -154,6 +173,7 @@ Une étude comparative sur les lecteurs de cartes à puce et leur interconnexion
 avec un système d'information sera également donnée pour établir et justifier
 notre choix de conception sur les architectures applicative et technique
 choisies. \\
+L'expression des besoins sera également fournis. \\
 
 Le \textbf{mercredi 22 octobre 2014}, le dossier d'architecture applicative sera rendu
 et validé. \\
@@ -209,9 +229,19 @@ correction. \\
 Sinon, le document est renvoyé à l'auteur afin qu'il approuve les modifications
 pour valider définitivement le document. \\
 
+Dans le cas où un travail requiert des attentes techniques spécifiques, un de
+nos expert peut faire partie du processus de correction afin de certifier la
+qualiter des livrables finaux. \\
+
 \section{Glossaire}
 
-% TODO remplir cette section
+\begin{description}
+  \item[Carte à puce] Objet possédant un identifié et pouvant être connecté par un lecteur de carte à puce.
+  \item[Lecteur de carte à puce] Lecteur pouvant lire des cartes à puce par un protocol défini.
+  \item[Entreprise] Personne légale représentant une entreprise devant la loi.
+  \item[Commande] Demande d'une quantité de carte à puce par une entreprise.
+  \item[Facture]
+\end{description}
 
 \end{document}
 
