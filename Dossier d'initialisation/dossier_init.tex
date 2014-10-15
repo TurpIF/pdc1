@@ -1,5 +1,7 @@
 \input{../header}
-
+\usepackage{lscape}
+\usepackage{wrapfig}
+\usepackage{float}
 \begin{document}
 
 \Document{Dossier d'initialisation}
@@ -68,10 +70,58 @@ planning suivant :
 En cas de force majeure rendant indisponible un membre de l'équipe, une réunion
 exceptionnelle peut être planifiée pour redistribuer les tâches de ce dernier.
 
+\subsection{Tableaux de bords}
+
+Ci-dessous sont détaillés les différents indicateurs présents sur le dashboard
+de gestion de projet, permettant de mesurer l'avancement du projet en temps
+réel.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{repartition-previsionnelle}
+    \caption{Répartition prévisionnelle de la charge de travail}
+    \label{fig:repartition-previsionnelle}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{repartition-effective}
+    \caption{Répartition effective de la charge de travail}
+    \label{fig:repartition-effective}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{rapport-repartition}
+    \caption{Rapport de répartition entre charge effective et charge prévisionnelle}
+    \label{fig:rapport-repartition}
+\end{figure}
+
+\subsection{Planning}
+
+Les plannings prévisionnel et effectif sont disponibles sur la figure
+\ref{fig:plannings}.
+
+\begin{landscape}
+ \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\paperheight]{plannings}
+    \caption{Plannings prévisionnel et effectif, avec quelques indicateurs}
+    \label{fig:plannings}
+    \end{figure}
+ \end{landscape}
+
 \section{Organisation de l'équipe}
 
 L'organisation hiérarchique de l'équipe est détaillée dans la figure
 \ref{fig:hierarchie}, mais peut être résumée comme ceci :
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.45\textwidth]{hierarchie}
+    \caption{Hiérarchie de l'équipe}
+    \label{fig:hierarchie}
+\end{wrapfigure}
 
 \begin{itemize}
     \item Jean-Marie Comets (chef de projet)
@@ -83,13 +133,6 @@ L'organisation hiérarchique de l'équipe est détaillée dans la figure
 L'ensemble des membres de l'équipe sont en dernière année de formation d'école
 d'ingénieurs à l'INSA de Lyon. C'est une équipe motivée et passionnée
 d'innovation.
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.8\textwidth]{hierarchie}
-    \caption{Hiérarchie de l'équipe}
-    \label{fig:hierarchie}
-\end{figure}
 
 \section{Analyse des risques}
 

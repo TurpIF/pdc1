@@ -1,15 +1,32 @@
-\documentclass[11pt, a4paper]{article}
+\documentclass[10pt, a4paper]{article}
 
+% On écrit en français
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{graphicx}
 \usepackage[frenchb]{babel}
-\usepackage[left=3cm, right=3cm]{geometry}
-\usepackage{titling}
-\usepackage{enumitem}
+\usepackage[T1]{fontenc}
 
+% Packages nécessaires
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% Document "fancy"
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+% Gros en-têtes/pied de pages
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% Police Helvetica <3
+\usepackage{helvet}
+\renewcommand*{\familydefault}{\sfdefault}
+
+% Enlever les alinéas
+\setlength{\parindent}{0pt}
+
+% Sous titre de document
+\usepackage{titling}
 \newcommand{\subtitle}[1]{%
   \posttitle{%
     \par\end{center}
@@ -17,34 +34,15 @@
     \vskip0.5em}%
 }
 
-\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
-\setlist[description]{
-  style=multiline,
-  topsep=10pt,
-  leftmargin=5cm,
-  align=parright
-}
+% Nom du projet
+\def \DocumentProject {Dématérialisation d'un processus de paiement}
 
-% Headers & footers
-\usepackage{fancyhdr}
-\pagestyle{fancyplain}
-\fancyhead[LE]{\fancyplain{}{}}
-\fancyhead[CE]{\fancyplain{}{}}
-\fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
-\fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
-\fancyhead[CO]{\fancyplain{}{}}
-\fancyhead[RO]{\fancyplain{}{\thetitle}}
-\fancyfoot[LE]{\fancyplain{}{}}
-\fancyfoot[CE]{\fancyplain{}{}}
-\fancyfoot[RE]{\fancyplain{}{}}
-\fancyfoot[LO]{\fancyplain{}{}}
-\fancyfoot[CO]{\fancyplain{}{\bfseries\thepage}}
-\fancyfoot[RO]{\fancyplain{}{}}
-% \renewcommand{\footrulewidth}{0.4pt}
-
+% En tête complet de document
 \newcommand{\Document}[1]{%
-    \title{#1}
-    \subtitle{Dématérialisation d'un processus de paiement}
+    \def \DocumentTitle {#1}
+
+    \title{\DocumentTitle}
+    \subtitle{\DocumentProject}
     \author{
         COMETS Jean-Marie \\
         DELMARRE Adrian \\
@@ -57,3 +55,9 @@
 
     \tableofcontents \newpage
 }
+
+% Contenu des en-têtes/pied de pages
+\fancyhead[LE,RO]{\DocumentProject}
+\fancyhead[RE,LO]{\DocumentTitle}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[LE,RO]{\thepage}
