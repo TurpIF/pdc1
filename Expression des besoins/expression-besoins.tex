@@ -1,5 +1,6 @@
 \input{../header}
 \usepackage{wrapfig}
+\usepackage{lscape}
 \begin{document}
 
 \Document{Expression des besoins}
@@ -171,19 +172,25 @@ simplification des protocoles d'acquisition et d'utilisation.
 
 \section{Cas d'utilisation}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{mcc-marketing}
-    \caption{MCC Spécifique au marketing}
-    \label{fig:mcc-marketing}
-\end{figure}
+\begin{landscape}
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.7\paperheight]{mcc-marketing}
+      \caption{MCC Spécifique au marketing}
+      \label{fig:mcc-marketing}
+  \end{figure}
+\end{landscape}
+\newpage
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{mcc-extra}
-    \caption{MCC Général}
-    \label{fig:mcc-extra}
-\end{figure}
+\begin{landscape}
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.7\paperheight]{mcc-extra}
+      \caption{MCC Général}
+      \label{fig:mcc-extra}
+  \end{figure}
+\end{landscape}
+\newpage
 
 \subsection{Attentes de gestion}
 
@@ -194,6 +201,7 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Approvisionnement des cartes à puce}
     \label{fig:mot-approvisionnement-cartes-a-puce}
 \end{figure}
+\newpage
 
 \subsubsection{Éditer une facture pour une commande}
 \begin{figure}[ht]
@@ -202,6 +210,7 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Editer d'une facture pour une commande}
     \label{fig:mot-editer-facture-commande}
 \end{figure}
+\newpage
 
 \subsubsection{Effectuer une commande de cartes à puce}
 \begin{figure}[ht]
@@ -210,6 +219,7 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Effectuer une commande de cartes à puce}
     \label{fig:mot-effectuer-commande-cartes-a-puce}
 \end{figure}
+\newpage
 
 \subsubsection{Inscription d'une entreprise}
 \begin{figure}[ht]
@@ -218,6 +228,7 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Inscription d'une entreprise}
     \label{fig:mot-inscription-entreprise}
 \end{figure}
+\newpage
 
 \subsubsection{Traitement des commandes}
 \begin{figure}[ht]
@@ -226,6 +237,7 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Traitement des commandes}
     \label{fig:mot-traitement-commandes}
 \end{figure}
+\newpage
 
 \subsubsection{Demande de devis d'approvisionnement}
 
@@ -261,12 +273,13 @@ de l'entreprise.
 
 \subsubsection{Prospection des clients}
 
-\begin{wrapfigure}{r}{0.55\textwidth}
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.53\textwidth]{mot-prospection-clients}
+    \includegraphics[width=\textwidth]{mot-prospection-clients}
     \caption{Diagramme MOT pour le traitement "Prospection des clients"}
     \label{fig:mot-prospection-clients}
-\end{wrapfigure}
+\end{figure}
+% \newpage
 
 Avant toute démarche de prospection des clients directs, le service marketing
 aura déjà eu à sa disposition une \textbf{étude du marché} auprès des
