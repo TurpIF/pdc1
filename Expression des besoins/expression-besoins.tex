@@ -172,6 +172,11 @@ simplification des protocoles d'acquisition et d'utilisation.
 
 \section{Cas d'utilisation}
 
+Le modèle présenté en figure \ref{fig:mcc-marketing} présente les interactions
+principales entre les acteurs internes et externes lors des opérations
+nécessaires à la mise en place de service de paiement dématérialisé dans une
+entreprise ou chez un commerçant.
+
 \begin{landscape}
   \begin{figure}[ht]
       \centering
@@ -180,7 +185,29 @@ simplification des protocoles d'acquisition et d'utilisation.
       \label{fig:mcc-marketing}
   \end{figure}
 \end{landscape}
-\newpage
+
+Certains traitements ont été volontairement omis afin de ne pas surcharger le
+modèle et nuire à sa lisibilité. Par exemple, lorsque le service marketing
+reçoit un accueil négatif lors d'une opération de prospection, il est impératif
+de stocker cette réponse afin de planifier une éventuelle relance, et d'établir
+des statistiques sur les motivations de cet accueil modéré afin de corriger
+notre stratégie marketing, voire notre positionnement, ou même d'ouvrir de
+nouvelles gammes de produit. \\
+
+La confection et l'installation du matériel (bornes de lecture chez le
+commerçant, cartes à puce) sont confiées en sous-traitance à des entreprises
+spécialisées. Cela augmente nos délais de livraison, mais simplifie
+drastiquement la gestion du service. \\
+
+Conformément aux attentes exprimées par le client, le service facturation garde
+la responsabilité des commandes de carte à puce. \\
+
+Le modèle présent en figure \ref{fig:mcc-extra} présente les interactions
+principales entre les acteurs internes et externes dans les cas de
+fonctionnement régulier du système de paiement dématérialisé. \\
+
+Cela inclut les opérations financières de crédit et débit des comptes client,
+et les opérations de maintenance du matériel.
 
 \begin{landscape}
   \begin{figure}[ht]
@@ -190,7 +217,11 @@ simplification des protocoles d'acquisition et d'utilisation.
       \label{fig:mcc-extra}
   \end{figure}
 \end{landscape}
-\newpage
+
+La maintenance a été confiée en sous-traitance à une entreprise spécialisée
+(comme SPIE), laquelle se chargera de prendre contact avec le fournisseur
+(constructeur ou importateur du produit) si la panne constatée n'est pas
+réparable et que le produit doit être remplacé.
 
 \subsection{Attentes de gestion}
 
@@ -201,7 +232,6 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Approvisionnement des cartes à puce}
     \label{fig:mot-approvisionnement-cartes-a-puce}
 \end{figure}
-\newpage
 
 \subsubsection{Éditer une facture pour une commande}
 \begin{figure}[ht]
@@ -210,7 +240,6 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Editer d'une facture pour une commande}
     \label{fig:mot-editer-facture-commande}
 \end{figure}
-\newpage
 
 \subsubsection{Effectuer une commande de cartes à puce}
 \begin{figure}[ht]
@@ -219,7 +248,6 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Effectuer une commande de cartes à puce}
     \label{fig:mot-effectuer-commande-cartes-a-puce}
 \end{figure}
-\newpage
 
 \subsubsection{Inscription d'une entreprise}
 \begin{figure}[ht]
@@ -228,7 +256,6 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Inscription d'une entreprise}
     \label{fig:mot-inscription-entreprise}
 \end{figure}
-\newpage
 
 \subsubsection{Traitement des commandes}
 \begin{figure}[ht]
@@ -237,7 +264,6 @@ simplification des protocoles d'acquisition et d'utilisation.
     \caption{MOT : Traitement des commandes}
     \label{fig:mot-traitement-commandes}
 \end{figure}
-\newpage
 
 \subsubsection{Demande de devis d'approvisionnement}
 
@@ -279,7 +305,6 @@ de l'entreprise.
     \caption{Diagramme MOT pour le traitement "Prospection des clients"}
     \label{fig:mot-prospection-clients}
 \end{figure}
-% \newpage
 
 Avant toute démarche de prospection des clients directs, le service marketing
 aura déjà eu à sa disposition une \textbf{étude du marché} auprès des
