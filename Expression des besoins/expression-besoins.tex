@@ -171,19 +171,52 @@ simplification des protocoles d'acquisition et d'utilisation.
 
 \section{Cas d'utilisation}
 
+Le modèle présenté en figure \ref{fig:mcc-marketing} présente les interactions
+principales entre les acteurs internes et externes lors des opérations
+nécessaires à la mise en place de service de paiement dématérialisé dans une
+entreprise ou chez un commerçant.
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{mcc-marketing}
+    \includegraphics[width=\textwidth]{mcc-marketing}
     \caption{MCC Spécifique au marketing}
     \label{fig:mcc-marketing}
 \end{figure}
 
+Certains traitements ont été volontairement omis afin de ne pas surcharger le
+modèle et nuire à sa lisibilité. Par exemple, lorsque le service marketing
+reçoit un accueil négatif lors d'une opération de prospection, il est impératif
+de stocker cette réponse afin de planifier une éventuelle relance, et d'établir
+des statistiques sur les motivations de cet accueil modéré afin de corriger
+notre stratégie marketing, voire notre positionnement, ou même d'ouvrir de
+nouvelles gammes de produit.
+
+La confection et l'installation du matériel (bornes de lecture chez le
+commerçant, cartes à puce) sont confiées en sous-traitance à des entreprises
+spécialisées. Cela augmente nos délais de livraison, mais simplifie
+drastiquement la gestion du service.
+
+Conformément aux attentes exprimées par le client, le service facturation garde
+la responsabilité des commandes de carte à puce.
+
+Le modèle présent en figure \ref{fig:mcc-extra} présente les interactions
+principales entre les acteurs internes et externes dans les cas de
+fonctionnement régulier du système de paiement dématérialisé.
+
+Cela inclut les opérations financières de crédit et débit des comptes client,
+et les opérations de maintenance du matériel.
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{mcc-extra}
+    \includegraphics[width=\textwidth]{mcc-extra}
     \caption{MCC Général}
     \label{fig:mcc-extra}
 \end{figure}
+
+La maintenance a été confiée en sous-traitance à une entreprise spécialisée
+(comme SPIE), laquelle se chargera de prendre contact avec le fournisseur
+(constructeur ou importateur du produit) si la panne constatée n'est pas
+réparable et que le produit doit être remplacé.
 
 \subsection{Attentes de gestion}
 
