@@ -1,5 +1,6 @@
 \input{../header}
 \usepackage{wrapfig}
+\usepackage{lscape}
 \begin{document}
 
 \Document{Expression des besoins}
@@ -176,12 +177,14 @@ principales entre les acteurs internes et externes lors des opérations
 nécessaires à la mise en place de service de paiement dématérialisé dans une
 entreprise ou chez un commerçant.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{mcc-marketing}
-    \caption{MCC Spécifique au marketing}
-    \label{fig:mcc-marketing}
-\end{figure}
+\begin{landscape}
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.7\paperheight]{mcc-marketing}
+      \caption{MCC Spécifique au marketing}
+      \label{fig:mcc-marketing}
+  \end{figure}
+\end{landscape}
 
 Certains traitements ont été volontairement omis afin de ne pas surcharger le
 modèle et nuire à sa lisibilité. Par exemple, lorsque le service marketing
@@ -189,29 +192,31 @@ reçoit un accueil négatif lors d'une opération de prospection, il est impéra
 de stocker cette réponse afin de planifier une éventuelle relance, et d'établir
 des statistiques sur les motivations de cet accueil modéré afin de corriger
 notre stratégie marketing, voire notre positionnement, ou même d'ouvrir de
-nouvelles gammes de produit.
+nouvelles gammes de produit. \\
 
 La confection et l'installation du matériel (bornes de lecture chez le
 commerçant, cartes à puce) sont confiées en sous-traitance à des entreprises
 spécialisées. Cela augmente nos délais de livraison, mais simplifie
-drastiquement la gestion du service.
+drastiquement la gestion du service. \\
 
 Conformément aux attentes exprimées par le client, le service facturation garde
-la responsabilité des commandes de carte à puce.
+la responsabilité des commandes de carte à puce. \\
 
 Le modèle présent en figure \ref{fig:mcc-extra} présente les interactions
 principales entre les acteurs internes et externes dans les cas de
-fonctionnement régulier du système de paiement dématérialisé.
+fonctionnement régulier du système de paiement dématérialisé. \\
 
 Cela inclut les opérations financières de crédit et débit des comptes client,
 et les opérations de maintenance du matériel.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{mcc-extra}
-    \caption{MCC Général}
-    \label{fig:mcc-extra}
-\end{figure}
+\begin{landscape}
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.7\paperheight]{mcc-extra}
+      \caption{MCC Général}
+      \label{fig:mcc-extra}
+  \end{figure}
+\end{landscape}
 
 La maintenance a été confiée en sous-traitance à une entreprise spécialisée
 (comme SPIE), laquelle se chargera de prendre contact avec le fournisseur
@@ -221,10 +226,44 @@ réparable et que le produit doit être remplacé.
 \subsection{Attentes de gestion}
 
 \subsubsection{Approvisionnement de cartes à puce}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{mot-approvisionnement-cartes-a-puce}
+    \caption{MOT : Approvisionnement des cartes à puce}
+    \label{fig:mot-approvisionnement-cartes-a-puce}
+\end{figure}
+
 \subsubsection{Éditer une facture pour une commande}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{mot-editer-facture-commande}
+    \caption{MOT : Editer d'une facture pour une commande}
+    \label{fig:mot-editer-facture-commande}
+\end{figure}
+
 \subsubsection{Effectuer une commande de cartes à puce}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{mot-effectuer-commande-cartes-a-puce}
+    \caption{MOT : Effectuer une commande de cartes à puce}
+    \label{fig:mot-effectuer-commande-cartes-a-puce}
+\end{figure}
+
 \subsubsection{Inscription d'une entreprise}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{mot-inscription-entreprise}
+    \caption{MOT : Inscription d'une entreprise}
+    \label{fig:mot-inscription-entreprise}
+\end{figure}
+
 \subsubsection{Traitement des commandes}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{mot-traitement-commandes}
+    \caption{MOT : Traitement des commandes}
+    \label{fig:mot-traitement-commandes}
+\end{figure}
 
 \subsubsection{Demande de devis d'approvisionnement}
 
@@ -260,12 +299,12 @@ de l'entreprise.
 
 \subsubsection{Prospection des clients}
 
-\begin{wrapfigure}{r}{0.55\textwidth}
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.53\textwidth]{mot-prospection-clients}
+    \includegraphics[width=\textwidth]{mot-prospection-clients}
     \caption{Diagramme MOT pour le traitement "Prospection des clients"}
     \label{fig:mot-prospection-clients}
-\end{wrapfigure}
+\end{figure}
 
 Avant toute démarche de prospection des clients directs, le service marketing
 aura déjà eu à sa disposition une \textbf{étude du marché} auprès des
