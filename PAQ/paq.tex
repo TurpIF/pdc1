@@ -1,5 +1,20 @@
 \input{../header}
 
+\usepackage{array}
+
+\newcommand{\CUBref}[6]{
+  \renewcommand{\arraystretch}{1.75}
+  \setlength{\tabcolsep}{0.5cm}
+  \begin{tabular}{r l}
+    \multicolumn{2}{l}{\large{\textbf{#1}}} \\
+    \textbf{Description} & #2 \\
+    \textbf{Acteur} & #3 \\
+    \textbf{Précondition} & #4 \\
+    \textbf{Conséquence} & #5 \\
+    \textbf{Exception} & \multicolumn{1}{p{\textwidth}}{#6} \\
+  \end{tabular}
+}
+
 \begin{document}
 
 \Document{Plan d'assurance qualité}
@@ -167,12 +182,142 @@ squelette de développement de ces modèles organisationnels. \\
 \end{figure}
 
 \subsection{Architecture Applicative}
-MCD global du système
-Définition des blocs fonctionnels
-Liste des applications
-Services applicatifs
-Utilisation des services (forme à définir)
-% TODO remplir cette section
+Un livrable décrira précisément l'architecture applicative de la solution de
+conception choisi. Cette architecture détaillera les blocs applicatifs ainsi
+que les flux d'information entre ceux-ci. \\
+
+Pour respecter les attentes de solution évolutive d'Aventix, la conception
+devra être structurée en plusieurs couches applicatives. \\
+
+Ces différentes couches permettrons de séparer l'interface utilisateur, les
+objets métiers, les services, la communication et la persistance. \\
+
+Les points détaillés de l'architecture applicative seront les suivants :
+\begin{enumerate}
+  \item Définition des objets métiers
+  \item Extraction des blocs fonctionnels
+  \item Listing des applications utilisateurs
+  \item Génération des services
+  \item Description du workflow
+\end{enumerate}
+
+\subsubsection{Définition des objets métiers}
+Un MCD (Modèle Conceptuel de Données) global du système recensera de manière
+formel les données qui seront utilisées dans le SI. \\
+
+Un ensemble d'objets métiers pourront alors être extrait depuis ce modèle. \\
+
+Pour améliorer la compréhension et la qualité du résultat, chaque objet métier
+sera décrit en détail avec un définition associée. Cette définition sera
+reprise dans le glossaire à la fin de ce document. \\
+
+De plus, pour satisfaire l'intégrité de la solution, tous les services et
+foncteurs de l'architecture applicative devront faire explicitement référence à
+ces objets métiers lorsqu'ils font partie de leur workflow. \\
+
+\subsubsection{Extraction des blocs fonctionnels}
+Une série de blocs fonctionnels sera extraite du MCD global du système. \\
+
+La définition de ces blocs permet d'avoir un découpage en blocs peu dépendants.
+Cela simplifie alors la compréhension de la conception et surtout encapsule les
+différentes fonctions. \\
+
+Les attentes d'Aventix sur l'évolutivité de la conception sont alors respectées
+car l'ajout d'une nouvelle fonction se résumera en l'ajout d'un nouveau bloc
+fonctionnel. \\
+
+Egalement, la maintenabilité est facilité car chaque bloc est découpé de façon
+à minimiser ses dépendances avec ses voisins et ses communications avec
+l'extérieur. \\
+
+% TODO décrire la forme de la présentation des blocs fonctionnels
+
+\subsubsection{Listing des applications utilisateurs}
+La applications utilisateurs sont les points d'entrés des services de la
+conception. Ils représentent les fonctionnalités de très haut niveaux à la
+disposition des utilisateurs finaux. \\
+
+Chaque application devra être détaillées en précisant les points suivants :
+\begin{description}
+  \item[Nom] Nom unique de l'application
+  \item[Description] Court résumé de ce que fait l'application et comment
+    l'utiliser
+  \item[Acteur] Référence vers le type d'acteur pouvant effectuer l'application
+  \item[Précondition] Condition nécessaire pour utiliser l'application
+    (formation, matériel, action, état du SI, ...)
+  \item[Conséquence] Effet de bord induit par le processus
+  \item[Exception] Erreurs possibles durant le workflow % FIXME trop détaillé ?
+\end{description}
+
+~\\
+Pour plus de clarté, la forme des détails des applications suit ce modèle : \\
+
+\CUBref
+{Nom de l'application}
+{Description de l'application}
+{Acteur de l'application}
+{Précondition de l'application}
+{Conséquence de l'application}
+{
+  \begin{itemize}
+    \item Liste
+    \item Des exception
+    \item De l'application
+  \end{itemize}
+}
+
+Le nom des acteurs mis en jeu dans les applications est assuré d'être déclaré
+dans le glossaire. \\
+
+Si un objet métiers est mentionné, alors celui-ci a du être défini précédemment
+et avoir été rajouté au glossaire. \\
+
+Le nom de l'application doit être unique et permet de l'identifier par la
+suite. Si un processus fait mention à une application, la référence devra
+utiliser le nom de l'application intégralement. \\
+
+\subsubsection{Génération des services}
+A partir des applications et des objets métiers déclarés, une liste de service
+répondant aux besoins est fournis. \\
+
+Pour assurer l'utilisation de différentes couches logicielles, les services
+seront recensées dans différentes listes : \\
+\begin{itemize}
+  \item Service applicatif
+  \item Service métier
+  \item Service objet métier
+\end{itemize}
+
+~\\
+
+Les services applicatifs correspondent aux applications déclarées précédemment.
+Ils seront listés à nouveau mais ne seront pas détaillés. \\
+
+Les services métier et objet métier seront listés puis détaillés de la même
+façon que les application. \\
+
+Pour rappel le modèle utilisé est le suivant : \\
+
+\CUBref
+{Nom du service}
+{Description du service}
+{Acteur du service}
+{Précondition du service}
+{Conséquence du service}
+{
+  \begin{itemize}
+    \item Liste
+    \item Des exception
+    \item Du service
+  \end{itemize}
+}
+
+Les règles d'intégrités, à savoir la déclaration des acteurs et objet métiers
+utilisés, sont les même que celles décrites dans le listing des applications
+utilisateurs. \\
+
+\subsubsection{Description du workflow}
+% TODO définir comment on fait au niveau de la forme
 
 \subsection{Architecture Technique}
 \begin{enumerate}
