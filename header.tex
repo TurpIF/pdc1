@@ -56,6 +56,21 @@
     \tableofcontents \newpage
 }
 
+% Commande pour faire des CU (sans la description détaillée du processus)
+\usepackage{array}
+\newcommand{\CUBref}[6]{
+\renewcommand{\arraystretch}{1.75}
+  \setlength{\tabcolsep}{0.5cm}
+  \begin{tabular}{r l}
+    \multicolumn{2}{l}{\large{\textbf{#1}}} \\
+    \textbf{Description} & #2 \\
+    \textbf{Acteur} & #3 \\
+    \textbf{Précondition} & #4 \\
+    \textbf{Conséquence} & #5 \\
+    \textbf{Exception} & \multicolumn{1}{p{\textwidth}}{#6} \\
+  \end{tabular}
+}
+
 % Contenu des en-têtes/pied de pages
 \fancyhead[LE,RO]{\DocumentProject}
 \fancyhead[RE,LO]{\DocumentTitle}
