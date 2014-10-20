@@ -304,6 +304,48 @@ utilisateurs. \\
 \subsubsection{Description du workflow}
 % TODO définir comment on fait au niveau de la forme
 
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Nom du service métier}
+      \newinst{som}{SOM~:~Nom du service objet métier}
+
+      \begin{call}{acteur}{submit()}{ihm}{confirmation}
+          \begin{callself}{ihm}{getIdUF()}{id}
+          \end{callself}
+          \begin{callself}{ihm}{getInfos()}{infos}
+          \end{callself}
+          \begin{call}{ihm}{setInfosUF(id, infos)}{sm}{}
+            \begin{call}{sm}{findUF(id)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{callself}{sm}{checkInfosUF(infos)}{status,~message}
+              \end{callself}
+              \begin{sdblock}{IF}{status = OK}
+                \begin{callself}{sm}{setInfosUF(id, infos)}{OK}
+                \end{callself}
+                \begin{mess}{sm}{OK, ACCEPTED}{ihm}
+                \end{mess}
+              \end{sdblock}
+              \begin{sdblock}{ELSE}{status != OK}
+                \begin{mess}{sm}{NOT OK, message}{ihm}
+                \end{mess}
+              \end{sdblock}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+                \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{call}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Modification des informations des utilisateurs finaux (noté UF dans le diagramme)}
+\end{figure}
+
 \subsection{Architecture Technique}
 \begin{enumerate}
   \item Stockage
