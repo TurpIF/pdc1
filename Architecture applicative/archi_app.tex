@@ -19,6 +19,139 @@
 
 \section{Description du workflow}
 
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Utilisateur final}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(idUF, infosUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{setInfosUF(id, infos)}{sm}
+            \begin{call}{sm}{findById(id)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{callself}{sm}{checkInfosUF(infos)}{status,~message}
+              \end{callself}
+              \begin{sdblock}{IF}{status = OK}
+                \begin{call}{sm}{setInfos(id, infos)}{som}{}
+                \end{call}
+                \begin{mess}{sm}{OK, ACCEPTED}{ihm}
+                \end{mess}
+              \end{sdblock}
+              \begin{sdblock}{ELSE}{status != OK}
+                \begin{mess}{sm}{NOT OK, message}{ihm}
+                \end{mess}
+              \end{sdblock}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+                \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Modification des informations de l'utilisateurs final}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Utilisateur final}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{loginUF(loginInfos)}{sm}
+            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{callself}{sm}{connectUF(id)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Connexion de l'utilisateur final}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{activateUF(idUF)}{sm}
+            \begin{call}{sm}{findById(idUF)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{call}{sm}{activate(idUF)}{som}{}
+              \end{call}
+              \begin{callself}{sm}{notifyUF(idUF)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Activation d'un utilisateur final}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+      \newinst{api}{API~:~Banque}
+
+      % \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
+      %     \begin{messcall}{ihm}{activateUF(idUF)}{sm}
+      %       \begin{call}{sm}{findById(idUF)}{som}{found}
+      %       \end{call}
+      %       \begin{sdblock}{IF}{found = VRAI}
+      %         \begin{call}{sm}{activate(idUF)}{som}{}
+      %         \end{call}
+      %         \begin{callself}{sm}{notifyUF(idUF)}{}
+      %         \end{callself}
+      %         \begin{mess}{sm}{OK}{ihm}
+      %         \end{mess}
+      %       \end{sdblock}
+      %       \begin{sdblock}{ELSE}{found != VRAI}
+      %           \begin{mess}{sm}{NOT OK}{ihm}
+      %           \end{mess}
+      %       \end{sdblock}
+      %     \end{messcall}
+      % \end{call}
+  \end{sequencediagram}
+
+  \caption{Création d'un utilisateur final}
+\end{figure}
+
 \end{document}
 
 % vim: ft=tex et sw=2 sts=2
