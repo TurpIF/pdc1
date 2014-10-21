@@ -302,7 +302,28 @@ utilisés, sont les même que celles décrites dans le listing des applications
 utilisateurs. \\
 
 \subsubsection{Description du workflow}
-% TODO définir comment on fait au niveau de la forme
+Les séquences des opérations de la solution sont décrites grâce à des
+diagrammes de séquence détaillée. \\
+
+La figure \ref{fig:model-dsd} montre un exemple de structure de diagramme
+utilisé. Toutes les possibilités ne sont pas détaillées. \\
+
+Il est également possible d'avoir des couches supplémentaire telle qu'une couche
+d'API de la banque lorsqu'on doit effectuer des crédits/débits. \\
+
+Pour garantir la cohérence des diagrammes, les acteurs utilisés sont ceux qui
+ont déjà été défini précedemment dans l'expression des besoins et dans le MCD. \\
+
+Cela est valable aussi pour les services métiers qui doivent correspondrent aux
+nom des blocs fonctionnels et les services objet métier avec les objets
+métiers. \\
+
+De plus, les appels et les messages dans les diagrammes ont un nom clair et
+compréhensible. S'il y a besoin d'explication, alors le diagramme sera fourni
+avec un paragraphe expliquant les points sombres. \\
+
+Dans le cas où les diagrammes sont trop simple, un simple paragraphe détaillant
+la séquence est fournis. \\
 
 \begin{figure}
   \centering
@@ -310,40 +331,29 @@ utilisateurs. \\
   \begin{sequencediagram}
       \newthread{acteur}{Acteur}
       \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Nom du service métier}
-      \newinst{som}{SOM~:~Nom du service objet métier}
+      \newinst{sm}{SM~:~Service métier}
+      \newinst{som}{SOM~:~Service objet métier}
 
-      \begin{call}{acteur}{submit()}{ihm}{confirmation}
-          \begin{callself}{ihm}{getIdUF()}{id}
+      \begin{call}{acteur}{submit(arguments)}{ihm}{confirmation}
+          \begin{callself}{ihm}{callself(args)}{result}
           \end{callself}
-          \begin{callself}{ihm}{getInfos()}{infos}
-          \end{callself}
-          \begin{call}{ihm}{setInfosUF(id, infos)}{sm}{}
-            \begin{call}{sm}{findUF(id)}{som}{found}
+          \begin{messcall}{ihm}{messcall(args)}{sm}
+            \begin{call}{sm}{call()}{som}{result}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
-              \begin{callself}{sm}{checkInfosUF(infos)}{status,~message}
-              \end{callself}
-              \begin{sdblock}{IF}{status = OK}
-                \begin{callself}{sm}{setInfosUF(id, infos)}{OK}
-                \end{callself}
-                \begin{mess}{sm}{OK, ACCEPTED}{ihm}
-                \end{mess}
-              \end{sdblock}
-              \begin{sdblock}{ELSE}{status != OK}
-                \begin{mess}{sm}{NOT OK, message}{ihm}
-                \end{mess}
-              \end{sdblock}
+            \begin{sdblock}{IF}{condition}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
-                \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+            \begin{sdblock}{ELSE}{!condition}
+                \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
             \end{sdblock}
-          \end{call}
+          \end{messcall}
       \end{call}
   \end{sequencediagram}
 
-  \caption{Modification des informations des utilisateurs finaux (noté UF dans le diagramme)}
+  \caption{Modèle basique d'un diagramme de séquence détaillé}
+  \label{fig:model-dsd}
 \end{figure}
 
 \subsection{Architecture Technique}
