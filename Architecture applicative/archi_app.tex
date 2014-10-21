@@ -1,41 +1,74 @@
 \input{../header}
+\usepackage{rotating}
 
 \begin{document}
 
 \Document{Architecture applicative}
 
 \section{Définition des objets métiers}
+
 La figure \ref{fig:mcd} est le MCD (Modèle Conceptuel de Données) global du
 système. Il recense toutes les données utilisées dans le système d'information
-de l'étude. \\
+de l'étude.
 
-\begin{landscape}
-  \begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.7\paperheight]{mcd}
-      \caption{MCD global du système}
-      \label{fig:mcd}
-  \end{figure}
-\end{landscape}
+\begin{sidewaysfigure}[ht]
+    \centering
+    \includegraphics[width=\textheight]{mcd}
+    \caption{MCD global du système}
+    \label{fig:mcd}
+\end{sidewaysfigure}
 
 Les objets métiers utilisés dans la solution sont les suivants : \\
+
 \begin{description}
-  \item[Contact] ...
-  \item[Date] ...
-  \item[Commande] ...
-  \item[Carte à puce] ...
-  \item[Borne] ...
-  \item[Etat d'une borne] ...
-  \item[Fournisseur] ...
-  \item[Commercant] ...
-  \item[Etat d'une commande] ...
-  \item[Entreprise] ...
-  \item[Etat d'une entreprise] ...
-  \item[Créditeur] ...
-  \item[Utilisateur final] ...
-  \item[Mainteneur] ...
-  \item[Installateur] ...
+  \item[Contact] contact effectué avec une entreprise, historisant les
+    différents contacts qui ont été pris (marketing, support, etc).
+  \item[Commande] action de commande de cartes à puce par l'entreprise.
+  \item[État d'une commande] une commande pourra être dans un des états
+    suivants :
+    \begin{itemize}
+      \item débutée
+      \item prise en charge
+      \item en attente de fournisseur
+      \item en cours de livraison
+      \item annulée
+      \item finie
+    \end{itemize}
+  \item[Carte à puce] carte numérique identifiable par un numéro unique,
+    communiquant avec une borne pour effectuer un paiement.
+  \item[Borne] borne pouvant lire des cartes à puce
+  \item[État d'une borne] une borne pourra être dans un des états suivants :
+    \begin{itemize}
+      \item en stock
+      \item installée
+      \item fonctionnelle
+      \item en panne
+      \item ne communique pas
+      \item en réparation
+    \end{itemize}
+  \item[Fournisseur] agent externe servant à fournir le système en cartes à
+    puce ou en borne. Aucune distinction n'est faite entre ces deux vu que
+    c'est le même service qui va gérer les commandes de chaque.
+  \item[Entreprise] entreprise employant des utilisateurs finals, pouvant
+    commander des cartes à puce et créditer des utilisateurs finaux.
+  \item[État d'une entreprise] ...
+  \item[Utilisateur final] utilisateur de la carte à puce, faisant ses achats
+    chez des commerçants, et travaillant au sein d'une entreprise.
+  \item[Créditeur] personne capable de créditer un utilisateur final. Il peut
+    s'agir d'une entreprise ou d'un utilisateur final.
+  \item[Commercant] agent externe pouvant accueillir une borne, pouvant ainsi
+    effectuer des ventes depuis celle-ci.
+  \item[Mainteneur] acteur externe responsable de la maintenance d'une borne
+    chez un commerçant.
+  \item[Installateur] acteur externe responsable de l'installation d'une borne
+    chez un commerçant. Il peut aussi être un mainteneur, mais pas forcément,
+    d'où la distinction entre chacun.
 \end{description}
+
+Bien entendu, l'objet \textbf{Date} concerne l'historisation d'une action, et
+n'est représenté que par rigueur. Chaque date est identifiable uniquement par
+son temps \textbf{EPOCH}, le nombre de secondes s'étant écoulées depuis le
+\textbf{Jeudi 1\textsuperscript{er} Janvier 1970, 00:00 UTC}.
 
 \section{Extraction des blocs fonctionnels}
 
@@ -45,7 +78,7 @@ Les objets métiers utilisés dans la solution sont les suivants : \\
   \item[Contacts] exposition du système aux acteurs externes, et concerne
     surtout le support (maintenance).
   \item[Clients] ensemble des acteurs externes et leur interconnexions, ce bloc
-    a été choisi par sémantique plutot que par cohérence fonctionnelle.
+    a été choisi par sémantique plutôt que par cohérence fonctionnelle.
   \item[Commande] concerne les commandes de cartes à puce par l'entreprise.
   \item[Borne] fonctionnement et maintenance des bornes correspondantes aux
     cartes à puce.
@@ -55,11 +88,11 @@ Les objets métiers utilisés dans la solution sont les suivants : \\
 
 \section{Listing des applications utilisateurs}
 Le découpage applicatif le plus pertinent est un découpage par type de client.
-Les usages sont variés en fonction de l’acteur, et cela donne au client une
-interface unique. Egalement, les règles de suivi varient d’un acteur à
-l’autre.\\
+Les usages sont variés en fonction de l'acteur, et cela donne au client une
+interface unique. Également, les règles de suivi varient d'un acteur à
+l'autre.\\
 
-Nous avonc alors 3 acteurs principaux dans l'étude ce qui donne 3 applications
+Nous avons alors 3 acteurs principaux dans l'étude ce qui donne 3 applications
 utilisateurs : \\
 \begin{itemize}
   \item Application de gestion d'un commerçant
