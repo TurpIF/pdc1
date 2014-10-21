@@ -334,7 +334,7 @@ La liste des services applicatifs est la suivante : \\
             \begin{sdblock}{IF}{found = VRAI}
               \begin{call}{sm}{activate(idUF)}{som}{}
               \end{call}
-              \begin{callself}{sm}{notifyUF(idUF)}{}
+              \begin{callself}{sm}{notifyUF(idUF, ACTIVATION)}{}
               \end{callself}
               \begin{mess}{sm}{OK}{ihm}
               \end{mess}
@@ -348,6 +348,39 @@ La liste des services applicatifs est la suivante : \\
   \end{sequencediagram}
 
   \caption{Activation d'un utilisateur final}
+\end{figure}
+
+% DSD: desactivation d'un utilisateur final
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{deactivateUF(idUF)}{sm}
+            \begin{call}{sm}{findById(idUF)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{call}{sm}{deactivate(idUF)}{som}{}
+              \end{call}
+              \begin{callself}{sm}{notifyUF(idUF, DEACTIVATION)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Desactivation d'un utilisateur final}
 \end{figure}
 
 % DSD: création d'un utilisateur final
@@ -398,6 +431,32 @@ La liste des services applicatifs est la suivante : \\
   \end{sequencediagram}}
 
   \caption{Création d'un utilisateur final}
+\end{figure}
+
+% DSD: supprimer un utilisateur final
+\begin{figure}
+  \centering
+
+  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+      \newinst{api}{API~:~Banque}
+
+      \begin{call}{acteur}{submit(idUF)}{ihm}{removed}
+        \begin{call}{ihm}{removeUF(idUF)}{sm}{removed}
+          \begin{call}{sm}{removeById(idUF)}{som}{removed}
+          \end{call}
+          \begin{sdblock}{IF}{removed = VRAI}
+            \begin{messcall}{sm}{removeAccountUF(idUF)}{api}
+            \end{messcall}
+          \end{sdblock}
+        \end{call}
+      \end{call}
+  \end{sequencediagram}}
+
+  \caption{Suppression d'un utilisateur final}
 \end{figure}
 
 \end{document}
