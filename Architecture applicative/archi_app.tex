@@ -89,7 +89,7 @@ utilisateurs : \\
 {
   Cette application permet principalement aux commerçant de gérer et visualiser
   leurs transactions effectuées en utilisant ce système. \\
-  
+
   Il permet également aux commerçant de signaler si un problème à eu lieu
   durant l'utilisation du système, ou si il y a eu une erreur après
   l'utilisation. \\
@@ -114,14 +114,6 @@ utilisateurs : \\
       vers la connexion.
   \end{itemize}
 }
-
-% Un commerçant peut signaler une panne à Aventix. Celle-ci doivent être
-% enregistrer dans le SI afin d'améliorer la qualité du produit et tracer les
-% éventuelles erreurs. \\
-% 
-% Un commerçant à le droit de visualiser et suivre les transactions physiques
-% utilisant les services de la solution. Les transactions sont enregistrées dans
-% le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
 
 \CUBref
 {Application de gestion d'une entreprise}
@@ -212,6 +204,14 @@ La liste des services applicatifs est la suivante : \\
 ~\\
 
 \subsection{Services métier}
+% Un commerçant peut signaler une panne à Aventix. Celle-ci doivent être
+% enregistrer dans le SI afin d'améliorer la qualité du produit et tracer les
+% éventuelles erreurs. \\
+% 
+% Un commerçant à le droit de visualiser et suivre les transactions physiques
+% utilisant les services de la solution. Les transactions sont enregistrées dans
+% le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
+
 \subsubsection{Contacts}
 \subsubsection{Clients}
 \subsubsection{Débit}
@@ -325,32 +325,48 @@ La liste des services applicatifs est la suivante : \\
 \begin{figure}
   \centering
 
-  \begin{sequencediagram}
+  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
       \newthread{acteur}{Acteur~:~Entreprise}
       \newinst{ihm}{IHM}
       \newinst{sm}{SM~:~Clients}
       \newinst{som}{SOM~:~Utilisateur final}
       \newinst{api}{API~:~Banque}
 
-      % \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
-      %     \begin{messcall}{ihm}{activateUF(idUF)}{sm}
-      %       \begin{call}{sm}{findById(idUF)}{som}{found}
-      %       \end{call}
-      %       \begin{sdblock}{IF}{found = VRAI}
-      %         \begin{call}{sm}{activate(idUF)}{som}{}
-      %         \end{call}
-      %         \begin{callself}{sm}{notifyUF(idUF)}{}
-      %         \end{callself}
-      %         \begin{mess}{sm}{OK}{ihm}
-      %         \end{mess}
-      %       \end{sdblock}
-      %       \begin{sdblock}{ELSE}{found != VRAI}
-      %           \begin{mess}{sm}{NOT OK}{ihm}
-      %           \end{mess}
-      %       \end{sdblock}
-      %     \end{messcall}
-      % \end{call}
-  \end{sequencediagram}
+      \begin{call}{acteur}{submit(infosUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{createUF(infosUF)}{sm}
+            \begin{call}{sm}{findByInfos(infoUF)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{mess}{sm}{NOT OK, ALREADY EXIST}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+              \begin{callself}{sm}{checkInfosUF(infosUF)}{status, message}
+              \end{callself}
+              \begin{sdblock}{IF}{status = OK}
+                \begin{call}{sm}{create(infosUF)}{som}{id}
+                \end{call}
+                \begin{call}{sm}{createAccountUF(id)}{api}{status}
+                \end{call}
+                \begin{sdblock}{IF}{status = OK}
+                  \begin{mess}{sm}{OK}{ihm}
+                  \end{mess}
+                \end{sdblock}
+                \begin{sdblock}{ELSE}{status != OK}
+                  \begin{messcall}{sm}{remove(id)}{som}
+                  \end{messcall}
+                  \begin{mess}{sm}{NOT OK}{ihm}
+                  \end{mess}
+                \end{sdblock}
+              \end{sdblock}
+              \begin{sdblock}{ELSE}{status != OK}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+              \end{sdblock}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}}
 
   \caption{Création d'un utilisateur final}
 \end{figure}
