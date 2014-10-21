@@ -11,12 +11,14 @@ La figure \ref{fig:mcd} est le MCD (Modèle Conceptuel de Données) global du
 système. Il recense toutes les données utilisées dans le système d'information
 de l'étude.
 
-\begin{sidewaysfigure}[ht]
-    \centering
-    \includegraphics[width=\textheight]{mcd}
-    \caption{MCD global du système}
-    \label{fig:mcd}
-\end{sidewaysfigure}
+\begin{landscape}
+  \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.7\paperheight]{mcd}
+      \caption{MCD global du système}
+      \label{fig:mcd}
+  \end{figure}
+\end{landscape}
 
 Les objets métiers utilisés dans la solution sont les suivants : \\
 
@@ -275,7 +277,7 @@ Toutes les opérations des services objet métier suivent le formalise
 \textbf{CRUD}. C'est pourquoi, nous ne les listons et ne les détaillons pas
 ici. \\
 
-\section{Description du workflow}
+\section{Mise en application des services}
 Malgré la similarité entre les trois diagrammes de séquence
 \ref{dsd:connect-uf}, \ref{dsd:connect-com} et \ref{dsd:connect-comp}, nous
 avons décidé de les inclure au vu des différences au niveau des services métier
@@ -295,7 +297,7 @@ et objet métier.
           \begin{messcall}{ihm}{setInfosUF(id, infos)}{sm}
             \begin{call}{sm}{findById(id)}{som}{found}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
+            \begin{sdblock}{IF}{found = TRUE}
               \begin{callself}{sm}{checkInfosUF(infos)}{status,~message}
               \end{callself}
               \begin{sdblock}{IF}{status = OK}
@@ -309,7 +311,7 @@ et objet métier.
                 \end{mess}
               \end{sdblock}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
+            \begin{sdblock}{ELSE}{found != TRUE}
                 \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
                 \end{mess}
             \end{sdblock}
@@ -335,13 +337,13 @@ et objet métier.
           \begin{messcall}{ihm}{loginUF(loginInfos)}{sm}
             \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found, activated}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI and activated = VRAI}
+            \begin{sdblock}{IF}{found = TRUE and activated = TRUE}
               \begin{callself}{sm}{connectUF(id)}{}
               \end{callself}
               \begin{mess}{sm}{OK}{ihm}
               \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI or activated != VRAI}
+            \begin{sdblock}{ELSE}{found != TRUE or activated != TRUE}
                 \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
             \end{sdblock}
@@ -367,7 +369,7 @@ et objet métier.
           \begin{messcall}{ihm}{activateUF(idUF)}{sm}
             \begin{call}{sm}{findById(idUF)}{som}{found}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
+            \begin{sdblock}{IF}{found = TRUE}
               \begin{call}{sm}{activate(idUF)}{som}{}
               \end{call}
               \begin{callself}{sm}{notifyUF(idUF, ACTIVATION)}{}
@@ -375,7 +377,7 @@ et objet métier.
               \begin{mess}{sm}{OK}{ihm}
               \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
+            \begin{sdblock}{ELSE}{found != TRUE}
                 \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
             \end{sdblock}
@@ -401,7 +403,7 @@ et objet métier.
           \begin{messcall}{ihm}{deactivateUF(idUF)}{sm}
             \begin{call}{sm}{findById(idUF)}{som}{found}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
+            \begin{sdblock}{IF}{found = TRUE}
               \begin{call}{sm}{deactivate(idUF)}{som}{}
               \end{call}
               \begin{callself}{sm}{notifyUF(idUF, DEACTIVATION)}{}
@@ -409,7 +411,7 @@ et objet métier.
               \begin{mess}{sm}{OK}{ihm}
               \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
+            \begin{sdblock}{ELSE}{found != TRUE}
                 \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
             \end{sdblock}
@@ -436,11 +438,11 @@ et objet métier.
           \begin{messcall}{ihm}{createUF(infosUF)}{sm}
             \begin{call}{sm}{findByInfos(infoUF)}{som}{found}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
+            \begin{sdblock}{IF}{found = TRUE}
               \begin{mess}{sm}{NOT OK, ALREADY EXIST}{ihm}
               \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
+            \begin{sdblock}{ELSE}{found != TRUE}
               \begin{callself}{sm}{checkInfosUF(infosUF)}{status, message}
               \end{callself}
               \begin{sdblock}{IF}{status = OK}
@@ -487,7 +489,7 @@ et objet métier.
         \begin{call}{ihm}{removeUF(idUF)}{sm}{removed}
           \begin{call}{sm}{removeById(idUF)}{som}{removed}
           \end{call}
-          \begin{sdblock}{IF}{removed = VRAI}
+          \begin{sdblock}{IF}{removed = TRUE}
             \begin{messcall}{sm}{removeAccountUF(idUF)}{api}
             \end{messcall}
           \end{sdblock}
@@ -513,13 +515,13 @@ et objet métier.
           \begin{messcall}{ihm}{loginCommerçant(loginInfos)}{sm}
             \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
+            \begin{sdblock}{IF}{found = TRUE}
               \begin{callself}{sm}{connectCommerçant(id)}{}
               \end{callself}
               \begin{mess}{sm}{OK}{ihm}
               \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
+            \begin{sdblock}{ELSE}{found != TRUE}
                 \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
             \end{sdblock}
@@ -545,13 +547,13 @@ et objet métier.
           \begin{messcall}{ihm}{loginEntreprise(loginInfos)}{sm}
             \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
+            \begin{sdblock}{IF}{found = TRUE}
               \begin{callself}{sm}{connectEntreprise(id)}{}
               \end{callself}
               \begin{mess}{sm}{OK}{ihm}
               \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
+            \begin{sdblock}{ELSE}{found != TRUE}
                 \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
             \end{sdblock}
@@ -561,6 +563,110 @@ et objet métier.
 
   \caption{Connexion d'un entreprise}
   \label{dsd:connect-comp}
+\end{figure}
+
+% DSD signaler problème commerçant
+\begin{landscape}
+  \begin{figure}
+    \centering
+
+    \begin{sequencediagram}
+        \newthread{acteur}{Acteur~:~Commerçant}
+        \newinst{ihm}{IHM}
+        \newinst{sm}{SM~:~Contacts}
+        \newinst{somb}{SOM~:~Borne}
+        \newinst{somc}{SOM~:~Contact}
+        \newinst{somcom}{SOM~:~Commerçant}
+
+        \begin{call}{acteur}{submit(idCommerçant, idBorne, infosMessage)}{ihm}{confirmation}
+            \begin{messcall}{ihm}{reportCommerçant(idCommerçant, idBorne, infosMessage)}{sm}
+              \begin{call}{sm}{findById(idBorne)}{somb}{id, foundBorne}
+              \end{call}
+              \begin{call}{sm}{findById(idCommerçant)}{somcom}{id, foundCommerçant}
+              \end{call}
+              \begin{sdblock}{IF}{foundBorne = TRUE AND foundCommerçant = TRUE}
+                \begin{mess}{sm}{reportCommerçant(idCommerçant, idBorne, infosMessage)}{somc}
+                \end{mess}
+                \begin{mess}{sm}{OK}{ihm}
+                \end{mess}
+              \end{sdblock}
+              \begin{sdblock}{ELSE}{foundBorne != TRUE OR foundCommerçant != TRUE}
+                  \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+                  \end{mess}
+              \end{sdblock}
+            \end{messcall}
+        \end{call}
+    \end{sequencediagram}
+
+    \caption{Commerçant qui signale un poblème}
+    \label{dsd:signal-com}
+  \end{figure}
+\end{landscape}
+
+% DSD signaler problème entreprise
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Contacts}
+      \newinst{somc}{SOM~:~Contact}
+      \newinst{some}{SOM~:~Entreprise}
+
+      \begin{call}{acteur}{submit(idEntreprise, infosMessage)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{reportEntreprise(idEntreprise, infosMessage)}{sm}
+            \begin{call}{sm}{findById(idEntreprise)}{some}{id, foundEntreprise}
+            \end{call}
+            \begin{sdblock}{IF}{foundEntreprise = TRUE}
+              \begin{mess}{sm}{reportEntreprise(idEntreprise, infosMessage)}{somc}
+              \end{mess}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{foundEntreprise != TRUE}
+                \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Entreprise qui signale un poblème}
+  \label{dsd:signal-comp}
+\end{figure}
+
+% DSD signaler problème UF
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Utilisateur final}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Contacts}
+      \newinst{somc}{SOM~:~Contact}
+      \newinst{somu}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(idUF, infosMessage)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{reportUF(idUF, infosMessage)}{sm}
+            \begin{call}{sm}{findById(idUF)}{somu}{id, foundUF}
+            \end{call}
+            \begin{sdblock}{IF}{foundUF = TRUE}
+              \begin{mess}{sm}{reportUF(idUF, infosMessage)}{somc}
+              \end{mess}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{foundUF != TRUE}
+                \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Utilisateur final qui signale un poblème}
+  \label{dsd:signal-uf}
 \end{figure}
 
 \end{document}
