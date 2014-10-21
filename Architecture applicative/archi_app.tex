@@ -459,6 +459,68 @@ La liste des services applicatifs est la suivante : \\
   \caption{Suppression d'un utilisateur final}
 \end{figure}
 
+% DSD: connexion d'un commerçant
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Commerçant}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Commerçant}
+
+      \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{loginCommerçant(loginInfos)}{sm}
+            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{callself}{sm}{connectCommerçant(id)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Connexion d'un commerçant}
+\end{figure}
+
+% DSD: connexion d'une entreprise
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Entreprise}
+
+      \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{loginEntreprise(loginInfos)}{sm}
+            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found}
+            \end{call}
+            \begin{sdblock}{IF}{found = VRAI}
+              \begin{callself}{sm}{connectEntreprise(id)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != VRAI}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Connexion d'un entreprise}
+\end{figure}
+
 \end{document}
 
 % vim: ft=tex et sw=2 sts=2
