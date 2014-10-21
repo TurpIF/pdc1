@@ -38,36 +38,20 @@ Les objets métiers utilisés dans la solution sont les suivants : \\
 \end{description}
 
 \section{Extraction des blocs fonctionnels}
-A partir du MCD \ref{fig:mcd}, 6 blocs fonctionnels ont été retenu :
-\begin{itemize}
-  \item Contacts
-  \item Clients
-  \item Débit
-  \item Crédit
-  \item Commande
-  \item Borne
-\end{itemize}
-~\\
 
-% TODO dire comment les BF ont été obtenu
+À partir du MCD \ref{fig:mcd}, 6 blocs fonctionnels ont été retenu :
 
-\subsection{Contacts}
-% TODO commentaire
-
-\subsection{Clients}
-% TODO commentaire
-
-\subsection{Débit}
-% TODO commentaire
-
-\subsection{Crédit}
-% TODO commentaire
-
-\subsection{Commande}
-% TODO commentaire
-
-\subsection{Borne}
-% TODO commentaire
+\begin{description}
+  \item[Contacts] exposition du système aux acteurs externes, et concerne
+    surtout le support (maintenance).
+  \item[Clients] ensemble des acteurs externes et leur interconnexions, ce bloc
+    a été choisi par sémantique plutot que par cohérence fonctionnelle.
+  \item[Commande] concerne les commandes de cartes à puce par l'entreprise.
+  \item[Borne] fonctionnement et maintenance des bornes correspondantes aux
+    cartes à puce.
+  \item[Débit] actions de débit d'un utilisateur final
+  \item[Crédit] actions de crédit d'un utilisateur final
+\end{description}
 
 \section{Listing des applications utilisateurs}
 Le découpage applicatif le plus pertinent est un découpage par type de client.
