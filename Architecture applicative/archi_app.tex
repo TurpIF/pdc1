@@ -271,15 +271,15 @@ La liste des services applicatifs est la suivante : \\
 
       \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
           \begin{messcall}{ihm}{loginUF(loginInfos)}{sm}
-            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found}
+            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found, activated}
             \end{call}
-            \begin{sdblock}{IF}{found = VRAI}
+            \begin{sdblock}{IF}{found = VRAI and activated = VRAI}
               \begin{callself}{sm}{connectUF(id)}{}
               \end{callself}
               \begin{mess}{sm}{OK}{ihm}
               \end{mess}
             \end{sdblock}
-            \begin{sdblock}{ELSE}{found != VRAI}
+            \begin{sdblock}{ELSE}{found != VRAI or activated != VRAI}
                 \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
             \end{sdblock}
