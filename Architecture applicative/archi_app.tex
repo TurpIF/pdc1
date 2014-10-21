@@ -86,7 +86,10 @@ son temps \textbf{EPOCH}, le nombre de secondes s'étant écoulées depuis le
   \item[Crédit] actions de crédit d'un utilisateur final
 \end{description}
 
+% TODO plus de détails sur les blocs, eg PIPEAU
+
 \section{Listing des applications utilisateurs}
+
 Le découpage applicatif le plus pertinent est un découpage par type de client.
 Les usages sont variés en fonction de l'acteur, et cela donne au client une
 interface unique. Également, les règles de suivi varient d'un acteur à
@@ -229,6 +232,8 @@ La liste des services applicatifs est la suivante : \\
 % utilisant les services de la solution. Les transactions sont enregistrées dans
 % le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
 
+% TODO récupérer les services utilisés dans les DSD et les noter ici, peut-être
+% avec une description.
 \subsubsection{Contacts}
 \subsubsection{Clients}
 \subsubsection{Débit}
@@ -239,6 +244,8 @@ La liste des services applicatifs est la suivante : \\
 \subsection{Services objet métier}
 
 \section{Description du workflow}
+
+% DSD: modification des informations de l'utilisateur final
 \begin{figure}
   \centering
 
@@ -274,9 +281,10 @@ La liste des services applicatifs est la suivante : \\
       \end{call}
   \end{sequencediagram}
 
-  \caption{Modification des informations de l'utilisateurs final}
+  \caption{Modification des informations de l'utilisateur final}
 \end{figure}
 
+% DSD: connexion de l'utilisateur final
 \begin{figure}
   \centering
 
@@ -307,6 +315,7 @@ La liste des services applicatifs est la suivante : \\
   \caption{Connexion de l'utilisateur final}
 \end{figure}
 
+% DSD: activation d'un utilisateur final
 \begin{figure}
   \centering
 
@@ -339,6 +348,7 @@ La liste des services applicatifs est la suivante : \\
   \caption{Activation d'un utilisateur final}
 \end{figure}
 
+% DSD: création d'un utilisateur final
 \begin{figure}
   \centering
 
