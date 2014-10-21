@@ -234,16 +234,42 @@ La liste des services applicatifs est la suivante : \\
 
 % TODO récupérer les services métier utilisés dans les DSD et les noter ici,
 % peut-être avec une description.
+
 \subsubsection{Contacts}
+% \begin{description}
+% \end{description}
+
 \subsubsection{Clients}
+\begin{description}
+  \item[setInfosUF(id, infos)] Met à jour les informations personnelles de l'utilisateur final
+  \item[loginUF(loginInfos)] Tentative de connexion de l'utilisateur final avec ses informations de connexion
+  \item[connectUF(loginInfos)] Connexion effective de l'utlisateur dans le système
+  \item[activateUF(idUF)] Activation de l'utilisateur final l'autorisant à effectuer des opérations
+  \item[deactivateUF(idUF)] Désactivation de l'utlisateur final l'interdisant à effectuer des opérations
+  \item[notifyUF(infosUF, body)] Envoie d'un message à l'utilisateur final selon le corpus spécifié
+  \item[create(infosUF)] Création d'un nouvel utilisateur final au sein du SI en utilisant les informations
+  \item[remove(idUF)] Suppression d'un utilisateur final
+  \item[checkInfosUF(infosUF)] Vérification de l'intégrité sémantique des données
+  \item[loginCommerçant(loginInfos)] Tentative de connexion d'un commerçant avec ses informations de connexion
+  \item[connectCommerçant(loginInfos)] Connexion effective d'un commerçant dans le système
+  \item[loginEntreprise(loginInfos)] Tentative de connexion d'une entreprise avec ses informations de connexion
+  \item[connectEntreprise(loginInfos)] Connexion effective d'une entreprise dans le système
+\end{description}
+
 \subsubsection{Débit}
+% \begin{description}
+% \end{description}
+
 \subsubsection{Crédit}
-\subsubsection{Commande}
-\subsubsection{Borne}
+% \begin{description}
+% \end{description}
+
+% TODO faire la partie des BF Borne et Commande
 
 \subsection{Services objet métier}
-% TODO récupérer les services objet métier utilisés dans les DSD et les noter
-% ici, peut-être avec une description.
+Toutes les opérations des services objet métier suivent le formalise
+\textbf{CRUD}. C'est pourquoi, nous ne les listons et ne les détaillons pas
+ici. \\
 
 \section{Description du workflow}
 Malgré la similarité entre les trois diagrammes de séquence
