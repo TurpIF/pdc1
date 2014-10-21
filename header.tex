@@ -70,13 +70,13 @@
 \newcommand{\CUBref}[6]{
 \renewcommand{\arraystretch}{1.75}
   \setlength{\tabcolsep}{0.5cm}
-  \begin{tabular}{r l}
+  \begin{tabular}{rp{0.35\textwidth} lp{0.65\textwidth}}
     \multicolumn{2}{l}{\large{\textbf{#1}}} \\
-    \textbf{Description} & #2 \\
+    \textbf{Description} & \begin{minipage}[l]{0.65\textwidth}#2\end{minipage} \\
     \textbf{Acteur} & #3 \\
-    \textbf{Précondition} & #4 \\
-    \textbf{Conséquence} & #5 \\
-    \textbf{Exception} & \multicolumn{1}{p{\textwidth}}{#6} \\
+    \textbf{Précondition} & \begin{minipage}[l]{0.65\textwidth}#4\end{minipage} \\
+    \textbf{Conséquence} & \begin{minipage}[l]{0.65\textwidth}#5\end{minipage} \\
+    \textbf{Exception} & \multicolumn{1}{p{0.65\textwidth}}{#6} \\
   \end{tabular}
 }
 

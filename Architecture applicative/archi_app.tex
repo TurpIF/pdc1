@@ -70,16 +70,158 @@ A partir du MCD \ref{fig:mcd}, 6 blocs fonctionnels ont été retenu :
 % TODO commentaire
 
 \section{Listing des applications utilisateurs}
+Le découpage applicatif le plus pertinent est un découpage par type de client.
+Les usages sont variés en fonction de l’acteur, et cela donne au client une
+interface unique. Egalement, les règles de suivi varient d’un acteur à
+l’autre.\\
+
+Nous avonc alors 3 acteurs principaux dans l'étude ce qui donne 3 applications
+utilisateurs : \\
+\begin{itemize}
+  \item Application de gestion d'un commerçant
+  \item Application de gestion d'une entreprise
+  \item Application de gestion d'un utilisateur final
+\end{itemize}
+~\\
+
+\CUBref
+{Application de gestion d'un commerçant}
+{
+  Cette application permet principalement aux commerçant de gérer et visualiser
+  leurs transactions effectuées en utilisant ce système. \\
+  
+  Il permet également aux commerçant de signaler si un problème à eu lieu
+  durant l'utilisation du système, ou si il y a eu une erreur après
+  l'utilisation. \\
+}
+{Commerçant}
+{
+  Le commerçant doit être inscrit comme un commerçant auprès d'Aventix et donc
+  avoir une ou plusieurs bornes. \\
+
+  Les actions qu'il peut effectuées sont disponible uniquement grâce à une
+  identification sur l'IHM des services métiers correspondants (sauf mention
+  contraire explicite sur un des services métier). \\
+
+  Les identifiants à fournir pour s'authentifier sont établies durant
+  l'enregistrement du commerçant dans le SI. \\
+}
+{Pas de conséquences}
+{
+  \begin{itemize}
+    \item Le commerçant n'est pas authentifié lorsqu'il essaye d'utiliser un
+      service nécessitant une authentification. Il est alors simplement redirigé
+      vers la connexion.
+  \end{itemize}
+}
+
+% Un commerçant peut signaler une panne à Aventix. Celle-ci doivent être
+% enregistrer dans le SI afin d'améliorer la qualité du produit et tracer les
+% éventuelles erreurs. \\
+% 
+% Un commerçant à le droit de visualiser et suivre les transactions physiques
+% utilisant les services de la solution. Les transactions sont enregistrées dans
+% le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
+
+\CUBref
+{Application de gestion d'une entreprise}
+{
+  Cette application permet principalement aux entreprises de gérer leurs
+  employés en tant qu'utilisateurs finaux dans le SI. \\
+
+  L'entreprise peut effectuer des requêtes pour créer ou supprimer un
+  utilisateur. \\
+
+  Il peut aussi décider de désactiver un de ses employées temporairement ce qui
+  permet de gérer les cas où les titres-restaurant sont pas utilisables (en
+  vacances par exemple). L'entreprise a, bien sur, la possibilité de réactiver
+  un de ses employés. \\
+
+  L'ajout de crédits mensuelles dans les comptes de ses employés est à la
+  charge de l'entreprise. Elle possède donc un moyen de créditer ses propres
+  employés. \\
+
+  Il permet également aux entreprises de signaler si un problème à eu lieu
+  durant l'utilisation du système. \\
+}
+{Entreprise}
+{
+  L'entreprise doit être inscrit comme une entreprise auprès d'Aventix. \\
+
+  Les actions qu'il peut effectuées sont disponible uniquement grâce à une
+  identification sur l'IHM des services métiers correspondants (sauf mention
+  contraire explicite sur un des services métier). \\
+
+  Les identifiants à fournir pour s'authentifier sont établies durant
+  l'enregistrement de l'entreprise dans le SI. \\
+}
+{Pas de conséquences}
+{
+  \begin{itemize}
+    \item L'entreprise n'est pas authentifié lorsqu'il essaye d'utiliser un
+      service nécessitant une authentification. Elle est alors simplement
+      redirigé vers la connexion.
+  \end{itemize}
+}
+
+\CUBref
+{Application de gestion d'un utilisateur final}
+{
+  Cette application permet principalement aux utilisateurs finaux de gérer leurs
+  crédits sur leur carte à puce. \\
+
+  Il peuvent consulter l'état du compte de leur carte à puce. \\
+
+  En tant que personne morale souscrivant à un service, il a le droit de
+  modifier ses données personnelles enregistrées. \\
+
+  Afin de pouvoir utiliser la carte à puce en dehors des limites de crédits
+  imposées par son entreprise, l'utilisateur final peut se créditer lui-même. \\
+
+  L'application permet également aux utilisateurs finaux de signaler si un
+  problème à eu lieu durant l'utilisation du système. \\
+}
+{Utilisateur final}
+{
+  L'utilisateur doit être inscrit et actif auprès d'Aventix. \\
+
+  Les actions qu'il peut effectuées sont disponible uniquement grâce à une
+  identification sur l'IHM des services métiers correspondants (sauf mention
+  contraire explicite sur un des services métier). \\
+
+  Les identifiants à fournir pour s'authentifier sont établies durant
+  la création de l'utilisateur final par l'entreprise dans le SI. \\
+}
+{Pas de conséquences}
+{
+  \begin{itemize}
+    \item L'utilisateur final n'est pas authentifié lorsqu'il essaye d'utiliser
+      un service nécessitant une authentification. Il est alors simplement
+      redirigé vers la connexion.
+  \end{itemize}
+}
 
 \section{Génération des services}
-\subsection{Services applicatifs}
+\subsection{Services applicatif}
+La liste des services applicatifs est la suivante : \\
+\begin{itemize}
+  \item Application de gestion d'un commerçant
+  \item Application de gestion d'une entreprise
+  \item Application de gestion d'un utilisateur final
+\end{itemize}
+~\\
 
 \subsection{Services métier}
+\subsubsection{Contacts}
+\subsubsection{Clients}
+\subsubsection{Débit}
+\subsubsection{Crédit}
+\subsubsection{Commande}
+\subsubsection{Borne}
 
 \subsection{Services objet métier}
 
 \section{Description du workflow}
-
 \begin{figure}
   \centering
 
