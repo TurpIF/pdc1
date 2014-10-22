@@ -11,6 +11,30 @@ La figure \ref{fig:mcd} est le MCD (Modèle Conceptuel de Données) global du
 système. Il recense toutes les données utilisées dans le système d'information
 de l'étude.
 
+Les échanges liés au marketing ne figurent pas dans le MCD comme les commandes
+ou même les factures (lesquelles existent dans le modèle en tant que commandes
+échues amenant une transaction certaine). Lorsqu'une entreprise est approchée
+par le service marketing, elle est référencée en base et acquiert le statut de
+"prospect". Lorsqu'elle signe son premier contrat avec nous, son statut devient
+alors "prospect". Les informations relatives au contact (et à l'éventuel refus
+essuyé) sortent du champ de granularité observé.
+
+Il en est de même pour les transactions bancaires. L'acteur Banque a un simple
+rôle de garant des transactions :
+
+\begin{itemize}
+  \item La banque XXX partenaire d'AVENTIX garantit les transactions des bornes
+    NFC auprès des commerçants qui les hébergent. Ce mouvement permet de
+    différer et mutualiser le débit effectif.
+  \item La banque XXX partenaire d'AVENTIX garantit les transactions induites
+    par l'achat de crédit, que ce soit par un utilisateur final, ou par une
+    entreprise. Dans les deux cas, cette garantie se fait de connivence avec la
+    banque respective de l'acteur concerné.
+\end{itemize}
+
+La contrainte d'exclusion modélisée sur la relation de contact symbolise le
+fait qu'une action de contact ne peut concerner qu'un type d'acteur à la fois.
+
 \begin{landscape}
   \begin{figure}[ht]
       \centering
