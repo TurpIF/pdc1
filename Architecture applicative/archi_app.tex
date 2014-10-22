@@ -305,11 +305,29 @@ Les trois services applicatifs retenus dans la solution sont les suivants : \\
 \end{description}
 
 \subsubsection{Débit}
+
+\begin{description}
+  \item[getSuiviCommerçant(idCommerçant, dateDébut, dateFin)] Récupération de
+    l'historique des transactions des cartes à puce sur la borne donnée.
+\end{description}
+
 \subsubsection{Crédit}
+
+\begin{description}
+  \item[creditUFByUF(idUF, montant)] Crédit d'un utilisateur par lui-même,
+    passant par l'API banque pour garantir le paiement.
+  \item[creditUFByEntreprise(idUF, list<(idUF, montant)>)] Crédit de plusieurs
+    utilisateurs par leur entreprise, passant par l'API banque pour garantir le
+    paiement.
+\end{description}
 
 \subsection{Services objet métier}
 
+\paragraph{Utilisateur final}
+
 \begin{description}
+  \item[addSoldeReel(idUF, montant)] Augmentation du solde réel d'un
+    utilisateur final par le montant donné.
   \item[randomizeLoginInfos(idUF)] Création d'identifiants aléatoires pour
     l'utilisateur identifié par l'id \textbf{idUF}.
 \end{description}
@@ -768,11 +786,11 @@ la suite ajoutée au SI par le service commande par saisie manuelle.
       \newinst{somb}{SOM~:~Borne}
 
       \begin{call}{acteur}{submit(idCommerçant, dateDébut, dateFin)}{ihm}{list<(idCarteAPuce, montant)>}
-        \begin{call}{ihm}{getSuiviCommerçant(idCommerçant, dateDébut, dateFin)}{sm}{list<(idCarteAPuce, montant)>}
+        \begin{call}{ihm}{getSuiviCommerçant(idCommerçant, dateDébut, dateFin)}{sm}{list<(idCarteAPuce, montant, date)>}
             \begin{call}{sm}{transfertCommande(idUF, montant)}{api}{status}
-              \begin{call}{sm}{getBorne(idCommerçant)}{somc}{list<idBorne>}
+              \begin{call}{sm}{getBornes(idCommerçant)}{somc}{list<idBorne>}
               \end{call}
-              \begin{call}{sm}{getDebits(list<idBorne>, dateDébut, dateFin)}{somb}{list<(idCarteAPuce, montant)>}
+              \begin{call}{sm}{getDebits(list<idBorne>, dateDébut, dateFin)}{somb}{list<(idCarteAPuce, montant, date)>}
               \end{call}
             \end{call}
           \end{call}
