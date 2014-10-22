@@ -283,49 +283,89 @@ Toutes les opérations des services objet métier suivent le formalise
 ici. \\
 
 \section{Mise en application des services}
-Malgré la similarité entre les trois diagrammes de séquence
-\ref{dsd:connect-uf}, \ref{dsd:connect-com} et \ref{dsd:connect-comp}, nous
-avons décidé de les inclure au vu des différences au niveau des services métier
-et objet métier.
 
-% DSD: modification des informations de l'utilisateur final
+Malgré la similarité entre certains diagrammes de séquence, nous avons décidé
+de les inclure au vu des différences au niveau des services métier et objet
+métier.
+
+% DSD: création d'un utilisateur final
 \begin{figure}
   \centering
 
-  \begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Utilisateur final}
+  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
       \newinst{ihm}{IHM}
       \newinst{sm}{SM~:~Clients}
       \newinst{som}{SOM~:~Utilisateur final}
+      \newinst{api}{API~:~Banque}
 
-      \begin{call}{acteur}{submit(idUF, infosUF)}{ihm}{confirmation}
-          \begin{messcall}{ihm}{setInfosUF(id, infos)}{sm}
-            \begin{call}{sm}{findById(id)}{som}{found}
+      \begin{call}{acteur}{submit(infosUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{createUF(infosUF)}{sm}
+            \begin{call}{sm}{findByInfos(infoUF)}{som}{found}
             \end{call}
             \begin{sdblock}{IF}{found = TRUE}
-              \begin{callself}{sm}{checkInfosUF(infos)}{status,~message}
-              \end{callself}
-              \begin{sdblock}{IF}{status = OK}
-                \begin{call}{sm}{setInfos(id, infos)}{som}{}
-                \end{call}
-                \begin{mess}{sm}{OK, ACCEPTED}{ihm}
-                \end{mess}
-              \end{sdblock}
-              \begin{sdblock}{ELSE}{status != OK}
-                \begin{mess}{sm}{NOT OK, message}{ihm}
-                \end{mess}
-              \end{sdblock}
+              \begin{mess}{sm}{NOT OK, ALREADY EXIST}{ihm}
+              \end{mess}
             \end{sdblock}
             \begin{sdblock}{ELSE}{found != TRUE}
-                \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+              \begin{callself}{sm}{checkInfosUF(infosUF)}{status, message}
+              \end{callself}
+              \begin{sdblock}{IF}{status = OK}
+                \begin{call}{sm}{create(infosUF)}{som}{idUF}
+                \end{call}
+                \begin{call}{sm}{randomizeLoginInfos(idUF)}{som}{}
+                \end{call}
+                \begin{call}{sm}{createAccountUF(idUF)}{api}{status}
+                \end{call}
+                \begin{sdblock}{IF}{status = OK}
+                  \begin{mess}{sm}{OK}{ihm}
+                  \end{mess}
+                \end{sdblock}
+                \begin{sdblock}{ELSE}{status != OK}
+                  \begin{messcall}{sm}{remove(idUF)}{som}
+                  \end{messcall}
+                  \begin{mess}{sm}{NOT OK}{ihm}
+                  \end{mess}
+                \end{sdblock}
+              \end{sdblock}
+              \begin{sdblock}{ELSE}{status != OK}
+                \begin{mess}{sm}{NOT OK}{ihm}
                 \end{mess}
+              \end{sdblock}
             \end{sdblock}
           \end{messcall}
       \end{call}
-  \end{sequencediagram}
+  \end{sequencediagram}}
 
-  \caption{Modification des informations de l'utilisateur final}
-  \label{dsd:set-infos-uf}
+  \caption{Création d'un utilisateur final}
+  \label{dsd:create-uf}
+\end{figure}
+
+% DSD: supprimer un utilisateur final
+\begin{figure}
+  \centering
+
+  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+      \newinst{api}{API~:~Banque}
+
+      \begin{call}{acteur}{submit(idUF)}{ihm}{removed}
+        \begin{call}{ihm}{removeUF(idUF)}{sm}{removed}
+          \begin{call}{sm}{removeById(idUF)}{som}{removed}
+          \end{call}
+          \begin{sdblock}{IF}{removed = TRUE}
+            \begin{messcall}{sm}{removeAccountUF(idUF)}{api}
+            \end{messcall}
+          \end{sdblock}
+        \end{call}
+      \end{call}
+  \end{sequencediagram}}
+
+  \caption{Suppression d'un utilisateur final}
+  \label{dsd:remove-uf}
 \end{figure}
 
 % DSD: activation d'un utilisateur final
@@ -344,6 +384,8 @@ et objet métier.
             \end{call}
             \begin{sdblock}{IF}{found = TRUE}
               \begin{call}{sm}{activate(idUF)}{som}{}
+              \end{call}
+              \begin{call}{sm}{randomizeLoginInfos(idUF)}{som}{}
               \end{call}
               \begin{callself}{sm}{notifyUF(idUF, ACTIVATION)}{}
               \end{callself}
@@ -396,82 +438,48 @@ et objet métier.
   \label{dsd:deactivate-uf}
 \end{figure}
 
-% DSD: création d'un utilisateur final
+Dans les figures \ref{dsd:create-uf} et \ref{dsd:activate-uf}, le service objet
+métier \emph{randomizeLoginInfos} permet de créer des identifiants de connexion
+aléatoires pour l'utilisateur final actuellement créé.
+
+% DSD: modification des informations de l'utilisateur final
 \begin{figure}
   \centering
 
-  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Entreprise}
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Utilisateur final}
       \newinst{ihm}{IHM}
       \newinst{sm}{SM~:~Clients}
       \newinst{som}{SOM~:~Utilisateur final}
-      \newinst{api}{API~:~Banque}
 
-      \begin{call}{acteur}{submit(infosUF)}{ihm}{confirmation}
-          \begin{messcall}{ihm}{createUF(infosUF)}{sm}
-            \begin{call}{sm}{findByInfos(infoUF)}{som}{found}
+      \begin{call}{acteur}{submit(idUF, infosUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{setInfosUF(id, infos)}{sm}
+            \begin{call}{sm}{findById(id)}{som}{found}
             \end{call}
             \begin{sdblock}{IF}{found = TRUE}
-              \begin{mess}{sm}{NOT OK, ALREADY EXIST}{ihm}
-              \end{mess}
-            \end{sdblock}
-            \begin{sdblock}{ELSE}{found != TRUE}
-              \begin{callself}{sm}{checkInfosUF(infosUF)}{status, message}
+              \begin{callself}{sm}{checkInfosUF(infos)}{status,~message}
               \end{callself}
               \begin{sdblock}{IF}{status = OK}
-                \begin{call}{sm}{create(infosUF)}{som}{id}
+                \begin{call}{sm}{setInfos(id, infos)}{som}{}
                 \end{call}
-                \begin{call}{sm}{createAccountUF(id)}{api}{status}
-                \end{call}
-                \begin{sdblock}{IF}{status = OK}
-                  \begin{mess}{sm}{OK}{ihm}
-                  \end{mess}
-                \end{sdblock}
-                \begin{sdblock}{ELSE}{status != OK}
-                  \begin{messcall}{sm}{remove(id)}{som}
-                  \end{messcall}
-                  \begin{mess}{sm}{NOT OK}{ihm}
-                  \end{mess}
-                \end{sdblock}
+                \begin{mess}{sm}{OK, ACCEPTED}{ihm}
+                \end{mess}
               \end{sdblock}
               \begin{sdblock}{ELSE}{status != OK}
-                \begin{mess}{sm}{NOT OK}{ihm}
+                \begin{mess}{sm}{NOT OK, message}{ihm}
                 \end{mess}
               \end{sdblock}
             \end{sdblock}
+            \begin{sdblock}{ELSE}{found != TRUE}
+                \begin{mess}{sm}{NOT OK, NOT FOUND}{ihm}
+                \end{mess}
+            \end{sdblock}
           \end{messcall}
       \end{call}
-  \end{sequencediagram}}
+  \end{sequencediagram}
 
-  \caption{Création d'un utilisateur final}
-  \label{dsd:create-uf}
-\end{figure}
-
-% DSD: supprimer un utilisateur final
-\begin{figure}
-  \centering
-
-  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Entreprise}
-      \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Clients}
-      \newinst{som}{SOM~:~Utilisateur final}
-      \newinst{api}{API~:~Banque}
-
-      \begin{call}{acteur}{submit(idUF)}{ihm}{removed}
-        \begin{call}{ihm}{removeUF(idUF)}{sm}{removed}
-          \begin{call}{sm}{removeById(idUF)}{som}{removed}
-          \end{call}
-          \begin{sdblock}{IF}{removed = TRUE}
-            \begin{messcall}{sm}{removeAccountUF(idUF)}{api}
-            \end{messcall}
-          \end{sdblock}
-        \end{call}
-      \end{call}
-  \end{sequencediagram}}
-
-  \caption{Suppression d'un utilisateur final}
-  \label{dsd:remove-uf}
+  \caption{Modification des informations de l'utilisateur final}
+  \label{dsd:set-infos-uf}
 \end{figure}
 
 Dans les figures \ref{dsd:connect-com}, \ref{dsd:connect-comp} et
