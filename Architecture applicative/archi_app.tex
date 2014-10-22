@@ -5,7 +5,9 @@
 
 \Document{Architecture applicative}
 
-\section{Définition des objets métiers}
+\section{Modèle du domaine}
+
+\subsection{Définition des objets métiers}
 
 La figure \ref{fig:mcd} est le MCD (Modèle Conceptuel de Données) global du
 système. Il recense toutes les données utilisées dans le système d'information
@@ -100,7 +102,7 @@ n'est représenté que par rigueur. Chaque date est identifiable uniquement par
 son temps \textbf{EPOCH}, le nombre de secondes s'étant écoulées depuis le
 \textbf{Jeudi 1\textsuperscript{er} Janvier 1970, 00:00 UTC}.
 
-\section{Extraction des blocs fonctionnels}
+\subsection{Extraction des blocs fonctionnels}
 
 À partir du MCD \ref{fig:mcd}, 6 blocs fonctionnels ont été retenu :
 
@@ -123,19 +125,21 @@ son temps \textbf{EPOCH}, le nombre de secondes s'étant écoulées depuis le
 Le découpage applicatif le plus pertinent est un découpage par type de client.
 Les usages sont variés en fonction de l'acteur, et cela donne au client une
 interface unique. Également, les règles de suivi varient d'un acteur à
-l'autre.\\
+l'autre. \\
 
 Nous avons alors 3 acteurs principaux dans l'étude ce qui donne 3 applications
-utilisateurs : \\
+utilisateurs :
+
 \begin{itemize}
   \item Application de gestion d'un commerçant
   \item Application de gestion d'une entreprise
   \item Application de gestion d'un utilisateur final
 \end{itemize}
-~\\
+
+\subsection{Application de gestion d'un commerçant}
 
 \CUBref
-{Application de gestion d'un commerçant}
+{}%Application de gestion d'un commerçant}
 {
   Cette application permet principalement aux commerçant de gérer et visualiser
   leurs transactions effectuées en utilisant ce système. \\
@@ -165,8 +169,10 @@ utilisateurs : \\
   \end{itemize}
 }
 
+\subsection{Application de gestion d'une entreprise}
+
 \CUBref
-{Application de gestion d'une entreprise}
+{}%Application de gestion d'une entreprise}
 {
   Cette application permet principalement aux entreprises de gérer leurs
   employés en tant qu'utilisateurs finaux dans le SI. \\
@@ -206,8 +212,10 @@ utilisateurs : \\
   \end{itemize}
 }
 
+\subsection{Application de gestion d'un utilisateur final}
+
 \CUBref
-{Application de gestion d'un utilisateur final}
+{}%Application de gestion d'un utilisateur final}
 {
   Cette application permet principalement aux utilisateurs finaux de gérer leurs
   crédits sur leur carte à puce. \\
@@ -243,16 +251,6 @@ utilisateurs : \\
   \end{itemize}
 }
 
-\section{Génération des services}
-\subsection{Services applicatif}
-La liste des services applicatifs est la suivante : \\
-\begin{itemize}
-  \item Application de gestion d'un commerçant
-  \item Application de gestion d'une entreprise
-  \item Application de gestion d'un utilisateur final
-\end{itemize}
-~\\
-
 \subsection{Services métier}
 
 Un commerçant à le droit de visualiser et suivre les transactions physiques
@@ -275,18 +273,17 @@ le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
   \item[connectEntreprise(loginInfos)] Connexion effective d'une entreprise dans le système
 \end{description}
 
-% TODO faire la partie des BF Borne et Commande
-
 \subsection{Services objet métier}
-Toutes les opérations des services objet métier suivent le formalise
+
+Toutes les opérations des services objet métier suivent le formalisme
 \textbf{CRUD}. C'est pourquoi, nous ne les listons et ne les détaillons pas
-ici. \\
+ici.
 
 \section{Mise en application des services}
 
 Malgré la similarité entre certains diagrammes de séquence, nous avons décidé
 de les inclure au vu des différences au niveau des services métier et objet
-métier.
+métier. \\
 
 % DSD: création d'un utilisateur final
 \begin{figure}
@@ -440,7 +437,7 @@ métier.
 
 Dans les figures \ref{dsd:create-uf} et \ref{dsd:activate-uf}, le service objet
 métier \emph{randomizeLoginInfos} permet de créer des identifiants de connexion
-aléatoires pour l'utilisateur final actuellement créé.
+aléatoires pour l'utilisateur final actuellement créé. \\
 
 % DSD: modification des informations de l'utilisateur final
 \begin{figure}
@@ -486,7 +483,7 @@ Dans les figures \ref{dsd:connect-com}, \ref{dsd:connect-comp} et
 \ref{dsd:connect-uf}, la connexion d'un acteur externe sur l'interface
 d'utilisation externe du SI est spécifiée. La logique de connexion "bas-niveau"
 n'est pas détaillée pour laisser le choix à Aventix de la méthode
-d'identification.
+d'identification. \\
 
 % DSD: connexion d'un commerçant
 \begin{figure}
