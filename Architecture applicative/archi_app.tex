@@ -725,6 +725,100 @@ L'entreprise doit être validée valable (légalement existante) par le service
 commande, avant toute prise en main de l'entreprise dans le SI. Elle sera par
 la suite ajoutée au SI par le service commande par saisie manuelle.
 
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Utilisateur final}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Contacts}
+      \newinst{somu}{SOM~:~UF}
+      \newinst{api}{API~:~Banque}
+
+      \begin{call}{acteur}{submit(idUF, montant)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{creditUFByUF(idUF, montant)}{sm}
+            \begin{call}{sm}{transfertCommande(idUF, montant)}{api}{status}
+            \end{call}
+            \begin{sdblock}{IF}{status = OK}
+              \begin{mess}{sm}{addSoldeReel(idUF, montant)}{som}
+              \end{mess}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{status != OK}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Utilisateur final : commander crédit individuel}
+  \label{dsd:get-credit-uf}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Commerçant}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Débit}
+      \newinst{somc}{SOM~:~Commerçant}
+      \newinst{somb}{SOM~:~Borne}
+
+      \begin{call}{acteur}{submit(idCommerçant, dateDébut, dateFin)}{ihm}{list<(idCarteAPuce, montant)>}
+        \begin{call}{ihm}{getSuiviCommerçant(idCommerçant, dateDébut, dateFin)}{sm}{list<(idCarteAPuce, montant)>}
+            \begin{call}{sm}{transfertCommande(idUF, montant)}{api}{status}
+              \begin{call}{sm}{getBorne(idCommerçant)}{somc}{list<idBorne>}
+              \end{call}
+              \begin{call}{sm}{getDebits(list<idBorne>, dateDébut, dateFin)}{somb}{list<(idCarteAPuce, montant)>}
+              \end{call}
+            \end{call}
+          \end{call}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Commerçant : Lister les débits des utilisateurs finaux}
+  \label{dsd:get-debits-uf}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Crédit}
+      \newinst{somu}{SOM~:~UF}
+      \newinst{api}{API~:~Banque}
+
+      \begin{call}{acteur}{submit(idEntrepise, list<(idUF, montant)>)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{creditUFByEntreprise(idEntreprise, list<(idUF, montant)>)}{sm}
+            \begin{callself}{sm}{calculerMontant(list<montant>)}{montant}
+            \end{callself}
+            \begin{call}{sm}{transfertCommande(idEntreprise, montant)}{api}{status}
+            \end{call}
+            \begin{sdblock}{IF}{status = OK}
+              \begin{sdblock}{FOREACH}{list<(idUF, montant)>}
+                \begin{messcall}{sm}{addSoldeReel(idUF, montant)}{somu}
+                \end{messcall}
+              \end{sdblock}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{status != OK}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Entreprise : Commander des crédits pour des utilisateurs finaux}
+  \label{dsd:get-credit-uf}
+\end{figure}
+
 \end{document}
 
 % vim: ft=tex et sw=2 sts=2
