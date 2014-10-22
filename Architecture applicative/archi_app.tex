@@ -1,5 +1,4 @@
 \input{../header}
-\usepackage{rotating}
 
 \begin{document}
 
@@ -17,10 +16,10 @@ de Données) comme les commandes ou même les factures (lesquelles existent dans
 le modèle en tant que commandes échues amenant une transaction certaine). \\
 
 Lorsqu'une entreprise est approchée par le service marketing, elle est
-référencée en base et  acquiert le statut de \textbf{«prospect»}. \\
+référencée en base et  acquiert le statut de \textbf{prospect}. \\
 
 Lorsqu'elle signe son premier contrat avec nous, son statut devient alors
-\textbf{«client»}. \\
+\textbf{client}. \\
 
 Les informations relatives au contact (et à l'éventuel refus essuyé) sortent du
 champ de granularité observé. \\
@@ -299,7 +298,12 @@ utilisateurs :
 
 \subsection{Services objet métier}
 
-Toutes les opérations des services objet métier suivent le formalisme
+\begin{description}
+  \item[randomizeLoginInfos(idUF)] Création d'identifiants aléatoires pour
+    l'utilisateur identifié par l'id \textbf{idUF}.
+\end{description}
+
+Toutes les autres opérations des services objet métier suivent le formalisme
 \textbf{CRUD}. C'est pourquoi, nous ne les listons et ne les détaillons pas
 ici.
 
