@@ -23,10 +23,10 @@ Il en est de même pour les transactions bancaires. L'acteur Banque a un simple
 rôle de garant des transactions :
 
 \begin{itemize}
-  \item La banque XXX partenaire d'AVENTIX garantit les transactions des bornes
+  \item La banque XXX partenaire d'Aventix garantit les transactions des bornes
     NFC auprès des commerçants qui les hébergent. Ce mouvement permet de
     différer et mutualiser le débit effectif.
-  \item La banque XXX partenaire d'AVENTIX garantit les transactions induites
+  \item La banque XXX partenaire d'Aventix garantit les transactions induites
     par l'achat de crédit, que ce soit par un utilisateur final, ou par une
     entreprise. Dans les deux cas, cette garantie se fait de connivence avec la
     banque respective de l'acteur concerné.
@@ -254,22 +254,11 @@ La liste des services applicatifs est la suivante : \\
 ~\\
 
 \subsection{Services métier}
-% Un commerçant peut signaler une panne à Aventix. Celle-ci doivent être
-% enregistrer dans le SI afin d'améliorer la qualité du produit et tracer les
-% éventuelles erreurs. \\
-% 
-% Un commerçant à le droit de visualiser et suivre les transactions physiques
-% utilisant les services de la solution. Les transactions sont enregistrées dans
-% le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
 
-% TODO récupérer les services métier utilisés dans les DSD et les noter ici,
-% peut-être avec une description.
+Un commerçant à le droit de visualiser et suivre les transactions physiques
+utilisant les services de la solution. Les transactions sont enregistrées dans
+le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
 
-\subsubsection{Contacts}
-% \begin{description}
-% \end{description}
-
-\subsubsection{Clients}
 \begin{description}
   \item[setInfosUF(id, infos)] Met à jour les informations personnelles de l'utilisateur final
   \item[loginUF(loginInfos)] Tentative de connexion de l'utilisateur final avec ses informations de connexion
@@ -285,14 +274,6 @@ La liste des services applicatifs est la suivante : \\
   \item[loginEntreprise(loginInfos)] Tentative de connexion d'une entreprise avec ses informations de connexion
   \item[connectEntreprise(loginInfos)] Connexion effective d'une entreprise dans le système
 \end{description}
-
-\subsubsection{Débit}
-% \begin{description}
-% \end{description}
-
-\subsubsection{Crédit}
-% \begin{description}
-% \end{description}
 
 % TODO faire la partie des BF Borne et Commande
 
@@ -345,38 +326,6 @@ et objet métier.
 
   \caption{Modification des informations de l'utilisateur final}
   \label{dsd:set-infos-uf}
-\end{figure}
-
-% DSD: connexion de l'utilisateur final
-\begin{figure}
-  \centering
-
-  \begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Utilisateur final}
-      \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Clients}
-      \newinst{som}{SOM~:~Utilisateur final}
-
-      \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
-          \begin{messcall}{ihm}{loginUF(loginInfos)}{sm}
-            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found, activated}
-            \end{call}
-            \begin{sdblock}{IF}{found = TRUE and activated = TRUE}
-              \begin{callself}{sm}{connectUF(id)}{}
-              \end{callself}
-              \begin{mess}{sm}{OK}{ihm}
-              \end{mess}
-            \end{sdblock}
-            \begin{sdblock}{ELSE}{found != TRUE or activated != TRUE}
-                \begin{mess}{sm}{NOT OK}{ihm}
-                \end{mess}
-            \end{sdblock}
-          \end{messcall}
-      \end{call}
-  \end{sequencediagram}
-
-  \caption{Connexion de l'utilisateur final}
-  \label{dsd:connect-uf}
 \end{figure}
 
 % DSD: activation d'un utilisateur final
@@ -525,6 +474,12 @@ et objet métier.
   \label{dsd:remove-uf}
 \end{figure}
 
+Dans les figures \ref{dsd:connect-com}, \ref{dsd:connect-comp} et
+\ref{dsd:connect-uf}, la connexion d'un acteur externe sur l'interface
+d'utilisation externe du SI est spécifiée. La logique de connexion "bas-niveau"
+n'est pas détaillée pour laisser le choix à Aventix de la méthode
+d'identification.
+
 % DSD: connexion d'un commerçant
 \begin{figure}
   \centering
@@ -588,6 +543,44 @@ et objet métier.
   \caption{Connexion d'un entreprise}
   \label{dsd:connect-comp}
 \end{figure}
+
+% DSD: connexion de l'utilisateur final
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Utilisateur final}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{loginUF(loginInfos)}{sm}
+            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found, activated}
+            \end{call}
+            \begin{sdblock}{IF}{found = TRUE and activated = TRUE}
+              \begin{callself}{sm}{connectUF(id)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != TRUE or activated != TRUE}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Connexion de l'utilisateur final}
+  \label{dsd:connect-uf}
+\end{figure}
+
+Dans les figures \ref{dsd:signal-com}, \ref{dsd:signal-comp} et
+\ref{dsd:signal-uf}, un client peut signaler un problème du système en incluant
+les références appropriées et avec un message type (sujet, corps,
+pièces-jointes). Celle-ci doivent être enregistrée dans le SI afin d'améliorer
+la qualité du produit et tracer les éventuelles erreurs. \\
 
 % DSD signaler problème commerçant
 \begin{landscape}
