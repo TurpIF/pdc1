@@ -1,5 +1,4 @@
 \input{../header}
-\usepackage{rotating}
 
 \begin{document}
 
@@ -8,34 +7,38 @@
 \section{Modèle du domaine}
 
 \subsection{Définition des objets métiers}
-
 La figure \ref{fig:mcd} est le MCD (Modèle Conceptuel de Données) global du
 système. Il recense toutes les données utilisées dans le système d'information
 de l'étude. \\
 
-Les échanges liés au marketing ne figurent pas dans le MCD comme les commandes
-ou même les factures (lesquelles existent dans le modèle en tant que commandes
-échues amenant une transaction certaine). Lorsqu'une entreprise est approchée
-par le service marketing, elle est référencée en base et acquiert le statut de
-"prospect". Lorsqu'elle signe son premier contrat avec nous, son statut devient
-alors "client". Les informations relatives au contact (et à l'éventuel refus
-essuyé) sortent du champ de granularité observé. \\
+Les échanges liés au marketing ne figurent pas dans le MCD (Modèle Conceptuel
+de Données) comme les commandes ou même les factures (lesquelles existent dans
+le modèle en tant que commandes échues amenant une transaction certaine). \\
+
+Lorsqu'une entreprise est approchée par le service marketing, elle est
+référencée en base et  acquiert le statut de \textbf{prospect}. \\
+
+Lorsqu'elle signe son premier contrat avec nous, son statut devient alors
+\textbf{client}. \\
+
+Les informations relatives au contact (et à l'éventuel refus essuyé) sortent du
+champ de granularité observé. \\
 
 Il en est de même pour les transactions bancaires. L'acteur Banque a un simple
-rôle de garant des transactions :
-
+rôle de garant des transactions : \\
 \begin{itemize}
-  \item La banque XXX partenaire d'Aventix garantit les transactions des bornes
+  \item La banque $B$ partenaire d'Aventix garantit les transactions des bornes
     NFC auprès des commerçants qui les hébergent. Ce mouvement permet de
     différer et mutualiser le débit effectif.
-  \item La banque XXX partenaire d'Aventix garantit les transactions induites
+  \item La banque $B$ partenaire d'Aventix garantit les transactions induites
     par l'achat de crédit, que ce soit par un utilisateur final, ou par une
     entreprise. Dans les deux cas, cette garantie se fait de connivence avec la
-    banque respective de l'acteur concerné.
+    banque respective de l'acteur concerné. Toutefois, Aventix % TODO finir la phrase
 \end{itemize}
+~\\
 
 La contrainte d'exclusion modélisée sur la relation de contact symbolise le
-fait qu'une action de contact ne peut concerner qu'un type d'acteur à la fois.
+fait qu'une action de contact ne peut concerner qu'un type d'acteur à la fois. \\
 
 \begin{landscape}
   \begin{figure}[ht]
@@ -251,12 +254,40 @@ utilisateurs :
   \end{itemize}
 }
 
+\section{Génération des services}
+\subsection{Services applicatifs}
+Les trois services applicatifs retenus dans la solution sont les suivants : \\
+
+\begin{itemize}
+  \item Application de gestion d'un commerçant
+  \item Application de gestion d'une entreprise
+  \item Application de gestion d'un utilisateur final
+\end{itemize}
+~\\
+
 \subsection{Services métier}
+% Un commerçant peut signaler une panne à Aventix. Celle-ci doivent être
+% enregistrer dans le SI afin d'améliorer la qualité du produit et tracer les
+% éventuelles erreurs. \\
+% 
+% Un commerçant à le droit de visualiser et suivre les transactions physiques
+% utilisant les services de la solution. Les transactions sont enregistrées dans
+% le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
 
-Un commerçant à le droit de visualiser et suivre les transactions physiques
-utilisant les services de la solution. Les transactions sont enregistrées dans
-le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
+% TODO récupérer les services métier utilisés dans les DSD et les noter ici,
+% peut-être avec une description.
 
+\subsubsection{Contacts}
+\begin{description}
+  \item[reportCommerçant(idCommerçant, idBorne, infosMessage)] Envoie un
+    rapport d'erreur sur une borne de la part d'un commerçant
+  \item[reportEntreprise(idEntreprise, infosMessage)] Envoie un rapport
+    d'erreur de la part d'une entreprise
+  \item[reportUF(idUF, infosMessage)] Envoie un rapport d'erreur de la part
+    d'un utilisateur final
+\end{description}
+
+\subsubsection{Clients}
 \begin{description}
   \item[setInfosUF(id, infos)] Met à jour les informations personnelles de l'utilisateur final
   \item[loginUF(loginInfos)] Tentative de connexion de l'utilisateur final avec ses informations de connexion
@@ -273,9 +304,17 @@ le SI et un commerçant habilité doit pouvoir avoir accès à celles-ci. \\
   \item[connectEntreprise(loginInfos)] Connexion effective d'une entreprise dans le système
 \end{description}
 
+\subsubsection{Débit}
+\subsubsection{Crédit}
+
 \subsection{Services objet métier}
 
-Toutes les opérations des services objet métier suivent le formalisme
+\begin{description}
+  \item[randomizeLoginInfos(idUF)] Création d'identifiants aléatoires pour
+    l'utilisateur identifié par l'id \textbf{idUF}.
+\end{description}
+
+Toutes les autres opérations des services objet métier suivent le formalisme
 \textbf{CRUD}. C'est pourquoi, nous ne les listons et ne les détaillons pas
 ici.
 
