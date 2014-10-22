@@ -5,12 +5,16 @@
 
 \Document{Architecture applicative}
 
-\section{Définition des objets métiers}
+\section{Modèle du domaine}
 
-Les échanges liés au marketing ne figurent pas dans le MCD \ref{fig:mcd}
-(Modèle Conceptuel de Données) comme les commandes ou même les factures
-(lesquelles existent dans le modèle en tant que commandes échues amenant une
-transaction certaine). \\
+\subsection{Définition des objets métiers}
+La figure \ref{fig:mcd} est le MCD (Modèle Conceptuel de Données) global du
+système. Il recense toutes les données utilisées dans le système d'information
+de l'étude. \\
+
+Les échanges liés au marketing ne figurent pas dans le MCD (Modèle Conceptuel
+de Données) comme les commandes ou même les factures (lesquelles existent dans
+le modèle en tant que commandes échues amenant une transaction certaine). \\
 
 Lorsqu'une entreprise est approchée par le service marketing, elle est
 référencée en base et  acquiert le statut de \textbf{«prospect»}. \\
@@ -102,7 +106,7 @@ n'est représenté que par rigueur. Chaque date est identifiable uniquement par
 son temps \textbf{EPOCH}, le nombre de secondes s'étant écoulées depuis le
 \textbf{Jeudi 1\textsuperscript{er} Janvier 1970, 00:00 UTC}.
 
-\section{Extraction des blocs fonctionnels}
+\subsection{Extraction des blocs fonctionnels}
 
 À partir du MCD \ref{fig:mcd}, 6 blocs fonctionnels ont été retenu :
 
@@ -125,19 +129,21 @@ son temps \textbf{EPOCH}, le nombre de secondes s'étant écoulées depuis le
 Le découpage applicatif le plus pertinent est un découpage par type de client.
 Les usages sont variés en fonction de l'acteur, et cela donne au client une
 interface unique. Également, les règles de suivi varient d'un acteur à
-l'autre.\\
+l'autre. \\
 
 Nous avons alors 3 acteurs principaux dans l'étude ce qui donne 3 applications
-utilisateurs : \\
+utilisateurs :
+
 \begin{itemize}
   \item Application de gestion d'un commerçant
   \item Application de gestion d'une entreprise
   \item Application de gestion d'un utilisateur final
 \end{itemize}
-~\\
+
+\subsection{Application de gestion d'un commerçant}
 
 \CUBref
-{Application de gestion d'un commerçant}
+{}%Application de gestion d'un commerçant}
 {
   Cette application permet principalement aux commerçant de gérer et visualiser
   leurs transactions effectuées en utilisant ce système. \\
@@ -167,8 +173,10 @@ utilisateurs : \\
   \end{itemize}
 }
 
+\subsection{Application de gestion d'une entreprise}
+
 \CUBref
-{Application de gestion d'une entreprise}
+{}%Application de gestion d'une entreprise}
 {
   Cette application permet principalement aux entreprises de gérer leurs
   employés en tant qu'utilisateurs finaux dans le SI. \\
@@ -208,8 +216,10 @@ utilisateurs : \\
   \end{itemize}
 }
 
+\subsection{Application de gestion d'un utilisateur final}
+
 \CUBref
-{Application de gestion d'un utilisateur final}
+{}%Application de gestion d'un utilisateur final}
 {
   Cette application permet principalement aux utilisateurs finaux de gérer leurs
   crédits sur leur carte à puce. \\
@@ -244,16 +254,6 @@ utilisateurs : \\
       redirigé vers la connexion.
   \end{itemize}
 }
-
-\section{Génération des services}
-\subsection{Services applicatif}
-La liste des services applicatifs est la suivante : \\
-\begin{itemize}
-  \item Application de gestion d'un commerçant
-  \item Application de gestion d'une entreprise
-  \item Application de gestion d'un utilisateur final
-\end{itemize}
-~\\
 
 \subsection{Services métier}
 % Un commerçant peut signaler une panne à Aventix. Celle-ci doivent être
@@ -295,27 +295,170 @@ La liste des services applicatifs est la suivante : \\
 \end{description}
 
 \subsubsection{Débit}
-% \begin{description}
-% \end{description}
-
 \subsubsection{Crédit}
-% \begin{description}
-% \end{description}
-
-% TODO faire la partie des BF Borne et Commande
 
 \subsection{Services objet métier}
-Toutes les opérations des services objet métier suivent le formalise
+
+Toutes les opérations des services objet métier suivent le formalisme
 \textbf{CRUD}. C'est pourquoi, nous ne les listons et ne les détaillons pas
-ici. \\
+ici.
 
 \section{Mise en application des services}
-Malgré la similarité entre les trois diagrammes de séquence
-\ref{dsd:connect-uf}, \ref{dsd:connect-com} et \ref{dsd:connect-comp}, nous
-avons décidé de les inclure au vu des différences au niveau des services métier
-et objet métier.
 
-% DSD: modification des informations de l'utilisateur final
+Malgré la similarité entre certains diagrammes de séquence, nous avons décidé
+de les inclure au vu des différences au niveau des services métier et objet
+métier. \\
+
+\begin{figure}
+  \centering
+
+  \resizebox{!}{0.80\totalheight}{\begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+      \newinst{api}{API~:~Banque}
+
+      \begin{call}{acteur}{submit(infosUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{createUF(infosUF)}{sm}
+            \begin{call}{sm}{findByInfos(infoUF)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = TRUE}
+              \begin{mess}{sm}{NOT OK, ALREADY EXIST}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != TRUE}
+              \begin{callself}{sm}{checkInfosUF(infosUF)}{status, message}
+              \end{callself}
+              \begin{sdblock}{IF}{status = OK}
+                \begin{call}{sm}{create(infosUF)}{som}{idUF}
+                \end{call}
+                \begin{call}{sm}{randomizeLoginInfos(idUF)}{som}{}
+                \end{call}
+                \begin{call}{sm}{createAccountUF(idUF)}{api}{status}
+                \end{call}
+                \begin{sdblock}{IF}{status = OK}
+                  \begin{mess}{sm}{OK}{ihm}
+                  \end{mess}
+                \end{sdblock}
+                \begin{sdblock}{ELSE}{status != OK}
+                  \begin{messcall}{sm}{remove(idUF)}{som}
+                  \end{messcall}
+                  \begin{mess}{sm}{NOT OK}{ihm}
+                  \end{mess}
+                \end{sdblock}
+              \end{sdblock}
+              \begin{sdblock}{ELSE}{status != OK}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+              \end{sdblock}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}}
+
+  \caption{Création d'un utilisateur final}
+  \label{dsd:create-uf}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+      \newinst{api}{API~:~Banque}
+
+      \begin{call}{acteur}{submit(idUF)}{ihm}{removed}
+        \begin{call}{ihm}{removeUF(idUF)}{sm}{removed}
+          \begin{call}{sm}{removeById(idUF)}{som}{removed}
+          \end{call}
+          \begin{sdblock}{IF}{removed = TRUE}
+            \begin{messcall}{sm}{removeAccountUF(idUF)}{api}
+            \end{messcall}
+          \end{sdblock}
+        \end{call}
+      \end{call}
+  \end{sequencediagram}}
+
+  \caption{Suppression d'un utilisateur final}
+  \label{dsd:remove-uf}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{activateUF(idUF)}{sm}
+            \begin{call}{sm}{findById(idUF)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = TRUE}
+              \begin{call}{sm}{activate(idUF)}{som}{}
+              \end{call}
+              \begin{call}{sm}{randomizeLoginInfos(idUF)}{som}{}
+              \end{call}
+              \begin{callself}{sm}{notifyUF(idUF, ACTIVATION)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != TRUE}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Activation d'un utilisateur final}
+  \label{dsd:activate-uf}
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Entreprise}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{deactivateUF(idUF)}{sm}
+            \begin{call}{sm}{findById(idUF)}{som}{found}
+            \end{call}
+            \begin{sdblock}{IF}{found = TRUE}
+              \begin{call}{sm}{deactivate(idUF)}{som}{}
+              \end{call}
+              \begin{callself}{sm}{notifyUF(idUF, DEACTIVATION)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != TRUE}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Desactivation d'un utilisateur final}
+  \label{dsd:deactivate-uf}
+\end{figure}
+
+Dans les figures \ref{dsd:create-uf} et \ref{dsd:activate-uf}, le service objet
+métier \emph{randomizeLoginInfos} permet de créer des identifiants de connexion
+aléatoires pour l'utilisateur final actuellement créé. \\
+
 \begin{figure}
   \centering
 
@@ -355,185 +498,12 @@ et objet métier.
   \label{dsd:set-infos-uf}
 \end{figure}
 
-% DSD: connexion de l'utilisateur final
-\begin{figure}
-  \centering
+Dans les figures \ref{dsd:connect-com}, \ref{dsd:connect-comp} et
+\ref{dsd:connect-uf}, la connexion d'un acteur externe sur l'interface
+d'utilisation externe du SI est spécifiée. La logique de connexion "bas-niveau"
+n'est pas détaillée pour laisser le choix à Aventix de la méthode
+d'identification. \\
 
-  \begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Utilisateur final}
-      \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Clients}
-      \newinst{som}{SOM~:~Utilisateur final}
-
-      \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
-          \begin{messcall}{ihm}{loginUF(loginInfos)}{sm}
-            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found, activated}
-            \end{call}
-            \begin{sdblock}{IF}{found = TRUE and activated = TRUE}
-              \begin{callself}{sm}{connectUF(id)}{}
-              \end{callself}
-              \begin{mess}{sm}{OK}{ihm}
-              \end{mess}
-            \end{sdblock}
-            \begin{sdblock}{ELSE}{found != TRUE or activated != TRUE}
-                \begin{mess}{sm}{NOT OK}{ihm}
-                \end{mess}
-            \end{sdblock}
-          \end{messcall}
-      \end{call}
-  \end{sequencediagram}
-
-  \caption{Connexion de l'utilisateur final}
-  \label{dsd:connect-uf}
-\end{figure}
-
-% DSD: activation d'un utilisateur final
-\begin{figure}
-  \centering
-
-  \begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Entreprise}
-      \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Clients}
-      \newinst{som}{SOM~:~Utilisateur final}
-
-      \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
-          \begin{messcall}{ihm}{activateUF(idUF)}{sm}
-            \begin{call}{sm}{findById(idUF)}{som}{found}
-            \end{call}
-            \begin{sdblock}{IF}{found = TRUE}
-              \begin{call}{sm}{activate(idUF)}{som}{}
-              \end{call}
-              \begin{callself}{sm}{notifyUF(idUF, ACTIVATION)}{}
-              \end{callself}
-              \begin{mess}{sm}{OK}{ihm}
-              \end{mess}
-            \end{sdblock}
-            \begin{sdblock}{ELSE}{found != TRUE}
-                \begin{mess}{sm}{NOT OK}{ihm}
-                \end{mess}
-            \end{sdblock}
-          \end{messcall}
-      \end{call}
-  \end{sequencediagram}
-
-  \caption{Activation d'un utilisateur final}
-  \label{dsd:activate-uf}
-\end{figure}
-
-% DSD: desactivation d'un utilisateur final
-\begin{figure}
-  \centering
-
-  \begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Entreprise}
-      \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Clients}
-      \newinst{som}{SOM~:~Utilisateur final}
-
-      \begin{call}{acteur}{submit(idUF)}{ihm}{confirmation}
-          \begin{messcall}{ihm}{deactivateUF(idUF)}{sm}
-            \begin{call}{sm}{findById(idUF)}{som}{found}
-            \end{call}
-            \begin{sdblock}{IF}{found = TRUE}
-              \begin{call}{sm}{deactivate(idUF)}{som}{}
-              \end{call}
-              \begin{callself}{sm}{notifyUF(idUF, DEACTIVATION)}{}
-              \end{callself}
-              \begin{mess}{sm}{OK}{ihm}
-              \end{mess}
-            \end{sdblock}
-            \begin{sdblock}{ELSE}{found != TRUE}
-                \begin{mess}{sm}{NOT OK}{ihm}
-                \end{mess}
-            \end{sdblock}
-          \end{messcall}
-      \end{call}
-  \end{sequencediagram}
-
-  \caption{Desactivation d'un utilisateur final}
-  \label{dsd:deactivate-uf}
-\end{figure}
-
-% DSD: création d'un utilisateur final
-\begin{figure}
-  \centering
-
-  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Entreprise}
-      \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Clients}
-      \newinst{som}{SOM~:~Utilisateur final}
-      \newinst{api}{API~:~Banque}
-
-      \begin{call}{acteur}{submit(infosUF)}{ihm}{confirmation}
-          \begin{messcall}{ihm}{createUF(infosUF)}{sm}
-            \begin{call}{sm}{findByInfos(infoUF)}{som}{found}
-            \end{call}
-            \begin{sdblock}{IF}{found = TRUE}
-              \begin{mess}{sm}{NOT OK, ALREADY EXIST}{ihm}
-              \end{mess}
-            \end{sdblock}
-            \begin{sdblock}{ELSE}{found != TRUE}
-              \begin{callself}{sm}{checkInfosUF(infosUF)}{status, message}
-              \end{callself}
-              \begin{sdblock}{IF}{status = OK}
-                \begin{call}{sm}{create(infosUF)}{som}{id}
-                \end{call}
-                \begin{call}{sm}{createAccountUF(id)}{api}{status}
-                \end{call}
-                \begin{sdblock}{IF}{status = OK}
-                  \begin{mess}{sm}{OK}{ihm}
-                  \end{mess}
-                \end{sdblock}
-                \begin{sdblock}{ELSE}{status != OK}
-                  \begin{messcall}{sm}{remove(id)}{som}
-                  \end{messcall}
-                  \begin{mess}{sm}{NOT OK}{ihm}
-                  \end{mess}
-                \end{sdblock}
-              \end{sdblock}
-              \begin{sdblock}{ELSE}{status != OK}
-                \begin{mess}{sm}{NOT OK}{ihm}
-                \end{mess}
-              \end{sdblock}
-            \end{sdblock}
-          \end{messcall}
-      \end{call}
-  \end{sequencediagram}}
-
-  \caption{Création d'un utilisateur final}
-  \label{dsd:create-uf}
-\end{figure}
-
-% DSD: supprimer un utilisateur final
-\begin{figure}
-  \centering
-
-  \resizebox{!}{0.85\totalheight}{\begin{sequencediagram}
-      \newthread{acteur}{Acteur~:~Entreprise}
-      \newinst{ihm}{IHM}
-      \newinst{sm}{SM~:~Clients}
-      \newinst{som}{SOM~:~Utilisateur final}
-      \newinst{api}{API~:~Banque}
-
-      \begin{call}{acteur}{submit(idUF)}{ihm}{removed}
-        \begin{call}{ihm}{removeUF(idUF)}{sm}{removed}
-          \begin{call}{sm}{removeById(idUF)}{som}{removed}
-          \end{call}
-          \begin{sdblock}{IF}{removed = TRUE}
-            \begin{messcall}{sm}{removeAccountUF(idUF)}{api}
-            \end{messcall}
-          \end{sdblock}
-        \end{call}
-      \end{call}
-  \end{sequencediagram}}
-
-  \caption{Suppression d'un utilisateur final}
-  \label{dsd:remove-uf}
-\end{figure}
-
-% DSD: connexion d'un commerçant
 \begin{figure}
   \centering
 
@@ -565,7 +535,6 @@ et objet métier.
   \label{dsd:connect-com}
 \end{figure}
 
-% DSD: connexion d'une entreprise
 \begin{figure}
   \centering
 
@@ -597,7 +566,43 @@ et objet métier.
   \label{dsd:connect-comp}
 \end{figure}
 
-% DSD signaler problème commerçant
+\begin{figure}
+  \centering
+
+  \begin{sequencediagram}
+      \newthread{acteur}{Acteur~:~Utilisateur final}
+      \newinst{ihm}{IHM}
+      \newinst{sm}{SM~:~Clients}
+      \newinst{som}{SOM~:~Utilisateur final}
+
+      \begin{call}{acteur}{submit(loginInfos)}{ihm}{confirmation}
+          \begin{messcall}{ihm}{loginUF(loginInfos)}{sm}
+            \begin{call}{sm}{findByLoginInfos(loginsInfos)}{som}{id, found, activated}
+            \end{call}
+            \begin{sdblock}{IF}{found = TRUE and activated = TRUE}
+              \begin{callself}{sm}{connectUF(id)}{}
+              \end{callself}
+              \begin{mess}{sm}{OK}{ihm}
+              \end{mess}
+            \end{sdblock}
+            \begin{sdblock}{ELSE}{found != TRUE or activated != TRUE}
+                \begin{mess}{sm}{NOT OK}{ihm}
+                \end{mess}
+            \end{sdblock}
+          \end{messcall}
+      \end{call}
+  \end{sequencediagram}
+
+  \caption{Connexion de l'utilisateur final}
+  \label{dsd:connect-uf}
+\end{figure}
+
+Dans les figures \ref{dsd:signal-com}, \ref{dsd:signal-comp} et
+\ref{dsd:signal-uf}, un client peut signaler un problème du système en incluant
+les références appropriées et avec un message type (sujet, corps,
+pièces-jointes). Celle-ci doivent être enregistrée dans le SI afin d'améliorer
+la qualité du produit et tracer les éventuelles erreurs. \\
+
 \begin{landscape}
   \begin{figure}
     \centering
@@ -635,7 +640,6 @@ et objet métier.
   \end{figure}
 \end{landscape}
 
-% DSD signaler problème entreprise
 \begin{figure}
   \centering
 
@@ -668,7 +672,6 @@ et objet métier.
   \label{dsd:signal-comp}
 \end{figure}
 
-% DSD signaler problème UF
 \begin{figure}
   \centering
 
@@ -700,6 +703,12 @@ et objet métier.
   \caption{Utilisateur final qui signale un poblème}
   \label{dsd:signal-uf}
 \end{figure}
+
+L'inscription d'une entreprise est un processus complexe qui ne doit pas être
+fait automatiquement, ni directement à la suite d'une demande d'une entreprise.
+L'entreprise doit être validée valable (légalement existante) par le service
+commande, avant toute prise en main de l'entreprise dans le SI. Elle sera par
+la suite ajoutée au SI par le service commande par saisie manuelle.
 
 \end{document}
 
