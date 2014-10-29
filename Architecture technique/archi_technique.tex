@@ -25,6 +25,39 @@ Dans la suite du document, les sous-systèmes suivront la nomenclature suivante:
 
 \section{Choix de la solution cloud}
 \section{Passage à l'échelle (scaling)}
+
 \section{Sécurité}
+
+\subsection{Infrastructure}
+
+En choisissant une solution cloud, la disponibilité de l'infrastructure est
+garantie par le prestataire cloud, en l'occurence \textbf{Amazon AWS}. Le
+système peut donc être considéré relativement sécurisé vis-à-vis des attaques
+par déni de service (DoS simple), ou autre attaque d'infrastructure.
+
+\subsection{Gestion du trafic indésirable}
+
+Le trafic indésirable correspond au trafic qui n'est pas directement lié à
+l'utilisation normale du système. Il peut être utilisé comme attaque visant à
+réduire exploiter des failles d'autres services présents sur la VM, ou tout
+simplement visant à réduire la disponibilité du système en multipliant les
+accés (DoS).
+
+EC2 met à disposition un firewall pour ses instances, ce qui permet de régler
+son accés. Cependant, les VM étant installées à l'intérieur d'une instance,
+elles doivent toutes être configurées séparément pour accepter uniquement le
+trafic qui les concerne.
+
+\begin{description}
+    \item[] 
+\end{description}
+
+\paragraph{Fermeture maximale}
+
+Chacune des VM installée sera 
+
+Un document relatant des conseils de sécurisation d'instance EC2, produit par
+ce même service, est disponible à l'adresse suivante :
+\url{http://aws.amazon.com/articles/1233/} (en date du \today).
 
 \end{document}
