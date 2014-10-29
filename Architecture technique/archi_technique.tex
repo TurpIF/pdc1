@@ -1,0 +1,30 @@
+\input{../header}
+
+\begin{document}
+
+\Document{Architecture technique}
+
+\section{Présentation générale}
+
+Dans la suite du document, les sous-systèmes suivront la nomenclature suivante:
+
+\begin{description}
+    \item[serveurs de dialogue borne] la machine contenant le serveur de
+        dialogue principal sera noté $B$, les machines de repli seront notées
+        $Bn$.
+    \item[serveurs de base de données] la machine contenant le serveur de base
+        de données principal (maître) sera noté $BDD$, les duplicats seront
+        notés $BDDn$, les archives seront notées $BDDa$.
+    \item[serveurs d'application] la machine contenant le serveur d'application
+        principal sera noté $X$, les machines de repli $Xx$, avec $X$
+        respectivement $E$, $C$, $U$ et $A$ pour les applications "gestion
+        commerçant", "gestion entreprise", "gestion utilisateur" et "gestion
+        Aventix".
+    % TODO ajouter les nomenclatures manquantes
+\end{description}
+
+\section{Choix de la solution cloud}
+\section{Passage à l'échelle (scaling)}
+\section{Sécurité}
+
+\end{document}
