@@ -45,26 +45,27 @@ En passant par une solution cloud, le système est aussi protégé des attaques
 physiques (coupure générale, attaque électromagnétique, etc...), mais encore
 dépendant de l'infrastructure d'AWS.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{aws-europe}
+    \caption{Emplacements géographiques possibles des instances EC2}
+    \label{fig:aws-europe}
+\end{figure}
+
 \subsection{Gestion du trafic indésirable}
 
 Le trafic indésirable correspond au trafic qui n'est pas directement lié à
 l'utilisation normale du système. Il peut être utilisé comme attaque visant à
 réduire exploiter des failles d'autres services présents sur la VM, ou tout
 simplement visant à réduire la disponibilité du système en multipliant les
-accés (DoS).
+accés (DoS). \\
 
 EC2 met à disposition un firewall pour ses instances, ce qui permet de régler
 son accés. Cependant, les VM étant installées à l'intérieur d'une instance,
 elles doivent toutes être configurées séparément pour accepter uniquement le
 trafic qui les concerne.
 
-\begin{description}
-    \item[] 
-\end{description}
-
-\paragraph{Fermeture maximale}
-
-Chacune des VM installée sera 
+\subsubsection{Fermeture maximale}
 
 Un document relatant des conseils de sécurisation d'instance EC2, produit par
 ce même service, est disponible à l'adresse suivante :
