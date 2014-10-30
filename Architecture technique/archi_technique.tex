@@ -33,7 +33,17 @@ Dans la suite du document, les sous-systèmes suivront la nomenclature suivante:
 En choisissant une solution cloud, la disponibilité de l'infrastructure est
 garantie par le prestataire cloud, en l'occurence \textbf{Amazon AWS}. Le
 système peut donc être considéré relativement sécurisé vis-à-vis des attaques
-par déni de service (DoS simple), ou autre attaque d'infrastructure.
+par déni de service (DoS simple), ou autre attaque d'infrastructure. \\
+
+De plus, la disponibilité du système est dépendante de la disponibilité d'AWS,
+en l'occurence celle-ci peut être garantie selon le prix de la prestation. Le
+taux de panne de 0\% ne peut malheureusement pas être garanti, du fait du
+nombre de facteurs externes entrant en jeu. Cependant, un taux de 99\%, voire
+jusqu'à 99.95\% peut être garanti par AWS. \\
+
+En passant par une solution cloud, le système est aussi protégé des attaques
+physiques (coupure générale, attaque électromagnétique, etc...), mais encore
+dépendant de l'infrastructure d'AWS.
 
 \subsection{Gestion du trafic indésirable}
 
