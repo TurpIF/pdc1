@@ -21,7 +21,7 @@ Cependant, certains points doivent être justifiés ou davantage expliqués.
 L'accés aux serveurs applicatifs est gouverné par une couche \textbf{firewall}
 et une couche \textbf{proxy}. La couche firewall est nécessaire pour gérer le
 trafic indésirable (se référer à la section
-\ref{subsec:gestion-trafic-indesirable} pour plus de détails). La couche proxy
+\ref{subsec:securite-trafic} pour plus de détails). La couche proxy
 permet de gérer le passage à l'échelle des serveurs applicatifs. \\
 
 Le principe général du passage à l'échelle des serveurs applicatifs est basé
@@ -31,11 +31,15 @@ référer à la section {\huge \textbf{TODO} } pour plus de détails).
 
 \paragraph{Base de données}
 
-L'accés au sous-système de base de données est régi par un deuxième firewall,
+L'accés au sous-système de base de données est régi par un firewall,
 spécifiquement conçu pour le SGBD choisi. L'idée est de bloquer l'accés au
 sous-système de base de données au monde extérieur, autorisant uniquement
 l'accés au proxy servant à répartir les accés aux différentes base de données
 "maîtres". \\
+
+De plus, une \emph{réplication partielle} est mise en place au même niveau que
+les serveurs applicatifs, pour réduire la latence dûe à l'accés au sous-système
+de base de données, ainsi que de réduire la charge qui lui est soumise.
 
 \section{Choix de la solution cloud}
 \label{sec:choix-solution-cloud}
@@ -61,17 +65,21 @@ facteurs externes entrant en jeu. Cependant, un taux de 99\%, voire jusqu'à
 
 En passant par une solution cloud, le système est aussi protégé des attaques
 physiques (coupure générale, attaque électromagnétique, etc...), mais encore
-dépendant de l'infrastructure d'AWS.
+dépendant de l'infrastructure d'AWS. \\
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{aws-europe}
-    \caption{Emplacements géographiques possibles des instances EC2}
-    \label{fig:aws-europe}
-\end{figure}
+Toutefois, une exception aux propositions demeure : le \textbf{sous-système de
+    base de données ne réside pas intégralement dans le cloud}. Cependant ce
+problème n'est pas d'une ampleur catastrophique, il faut noter qu'on est
+relativement bien protégé des attaques DoS grâce au pare-feu conçu
+spécifiquement pour contrôler l'accés et donc empêcher le trafic intempestif.
+Malheureusement les attaques physiques peuvent atteindre le sous-système de
+base de données, c'est la faiblesse majeure du système. On notera cependant
+l'autonomie partielle du système dans le cloud qui utilise des réplicats
+partiels de la base de données pour mettre à disposition les données les plus
+consultées (détaillé dans la section {\huge \textbf{TODO}}.
 
-\subsection{Gestion du trafic indésirable}
-\label{subsec:gestion-trafic-indesirable}
+\subsection{Sécurité du trafic}
+\label{subsec:securite-trafic}
 
 Le trafic indésirable correspond au trafic qui n'est pas directement lié à
 l'utilisation normale du système. Il peut être utilisé comme attaque visant à
@@ -92,11 +100,13 @@ ce même service, est disponible à l'adresse suivante :
 simplement de n'autoriser que le trafic qui est attendu, et par défaut de
 bloquer toute connexion entrante ne correspondant pas à une règle spécifiée.
 
-\paragraph{Surcouche base de données}
+\paragraph{Chiffrement des messages}
 
-Pour garantir la sécurité des données, une surcouche firewall est ajoutée au
-bloc "base de données. Dans le cas où un des systèmes applicatifs serait
-compromis, ce pare-feu supplémentaire limitera l'ampleur des dégâts (pas
-d'accés aux archives par exemple).
+La totalité des messages échangés avec le système seront effectuées en
+utilisant une authentification par clé. Il faudra par exemple acheter un
+\textbf{certificat SSL} pour permettre l'utilisation du protocole HTTPS pour
+accéder aux différentes applications web. Le dialogue avec les bornes sera
+quand à lui chiffré par une méthode utilisant la cryptographie asymétrique (clé
+publique).
 
 \end{document}
