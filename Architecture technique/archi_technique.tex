@@ -37,9 +37,9 @@ sous-système de base de données au monde extérieur, autorisant uniquement
 l'accès au proxy servant à répartir les accès aux différentes base de données
 "maîtres". \\
 
-De plus, une \emph{réplication partielle} est mise en place au même niveau que
-les serveurs applicatifs, pour réduire la latence due à l'accès au sous-système
-de base de données, ainsi que de réduire la charge qui lui est soumise.
+De plus, cache est configuré sur les serveurs de bases de données, pour réduire
+la latence due à l'accès au sous-système de base de données, ainsi que de
+réduire la charge qui lui est soumise.
 
 \section{Choix de la solution cloud}
 \label{sec:choix-solution-cloud}
@@ -68,15 +68,16 @@ physiques (coupure générale, attaque électromagnétique, etc...), mais encore
 dépendant de l'infrastructure d'AWS. \\
 
 Toutefois, une exception aux propositions demeure : le \textbf{sous-système de
-    base de données ne réside pas intégralement dans le cloud}. Cependant ce
-problème n'est pas d'une ampleur catastrophique, il faut noter qu'on est
-relativement bien protégé des attaques DoS grâce au pare-feu conçu
-spécifiquement pour contrôler l'accès et donc empêcher le trafic intempestif.
+base de données ne réside pas intégralement dans le cloud}. Ce problème n'est
+pas d'une ampleur catastrophique, il faut noter qu'on est relativement bien
+protégé des attaques DoS grâce au pare-feu conçu spécifiquement pour contrôler
+l'accès et donc empêcher le trafic intempestif. \\
+
 Malheureusement les attaques physiques peuvent atteindre le sous-système de
-base de données, c'est la faiblesse majeure du système. On notera cependant
-l'autonomie partielle du système dans le cloud qui utilise des réplicats
-partiels de la base de données pour mettre à disposition les données les plus
-consultées (détaillé dans la section {\huge \textbf{TODO}}.
+base de données, c'est la faiblesse majeure du système. Pour limiter davantage
+la vulnérabilité physique du système, deux baies de serveurs en syncronisation
+multi-master seront installées sur deux locaux différents (détaillé dans la
+section {\huge \textbf{TODO}}.
 
 \subsection{Sécurité du trafic}
 \label{subsec:securite-trafic}
