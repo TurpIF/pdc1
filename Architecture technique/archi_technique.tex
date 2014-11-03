@@ -78,6 +78,19 @@ transactions sur leur durée. Ce calcul sera en revanche nécessaire lors
 de l'estimation du volume de connexions simultanées). \\
 Cela représente un besoin en débit de 1 800 KB/s en pointe. \\
 
+Ces besoins en débit, plutôt modestes, nous permettent de nous diriger 
+vers une architecture fondée sur une forte virtualisation. \\
+Pour assurer une meilleure QoS, nos efforts matériels ne seront pas concentrés
+sur une seule machine, mais répartis sur au moins deux machines dans le cloud
+(ce nombre pourra croître à mesure que grandiront nos besoins).
+
+Nous avons opté pour une solution proposée par Amazon (gamme AWS), à savoir deux
+serveurs Linux C3.2xlarge, chacun doté de 8 cœurs, 15GiB de RAM et 2 disques SSD 
+de 80GB chacun. Ces serveurs seront situés respectivement à Dublin et Francfort. \\
+
+La faible volumétrie de stockage, à laquelle nous sommes contraints par les 
+enjeux budgétaires soulevés, sera compensée par une délégation de ce rôle à 
+des serveurs physiquement hébergés par nos soins.
 
 \section{Passage à l'échelle (scaling)}
 \label{sec:scaling}
