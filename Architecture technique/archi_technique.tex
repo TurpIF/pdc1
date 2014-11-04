@@ -29,7 +29,7 @@ permet de gérer le passage à l'échelle des serveurs applicatifs. \\
 Le principe général du passage à l'échelle des serveurs applicatifs est basé
 sur la duplication et synchronisation de plusieurs instances des serveurs
 applicatifs, avec balance de charge sur ces dernières, régie par le proxy (se
-référer à la section {\huge \textbf{TODO} } pour plus de détails).
+référer à la section \ref{subsec:scaling-applicatif} pour plus de détails).
 
 \paragraph{Base de données}
 
@@ -168,8 +168,7 @@ l'accès et donc empêcher le trafic intempestif. \\
 Malheureusement les attaques physiques peuvent atteindre le sous-système de
 base de données, c'est la faiblesse majeure du système. Pour limiter davantage
 la vulnérabilité physique du système, deux baies de serveurs en syncronisation
-multi-master seront installées sur deux locaux différents (détaillé dans la
-section {\huge \textbf{TODO}}.
+multi-master seront installées sur deux locaux différents.
 
 \subsection{Sécurité du trafic}
 \label{subsec:securite-trafic}
