@@ -9,12 +9,14 @@
 La figure \ref{fig:network} détaille l'architecture technique choisie.
 Cependant, certains points doivent être justifiés ou davantage expliqués.
 
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=\textwidth]{network}
-    \caption{Schéma général de l'architecture technique choisie}
-    \label{fig:network}
-\end{figure}
+\begin{landscape}
+  \begin{figure}[htpb]
+      \centering
+      \includegraphics[width=0.7\paperheight]{network}
+      \caption{Schéma général de l'architecture technique choisie}
+      \label{fig:network}
+  \end{figure}
+\end{landscape}
 
 \paragraph{Serveurs applicatifs}
 
@@ -103,6 +105,38 @@ des serveurs physiquement hébergés par nos soins.
 
 \section{Passage à l'échelle (scaling)}
 \label{sec:scaling}
+
+\subsection{Scaling des serveurs applicatifs}
+\label{subsec:scaling-applicatif}
+
+Les serveurs applicatifs sont disposés sous forme de serveurs virtuelles
+réparties sur plusieurs machines physiques. La charge importante de requête
+peut être soutenu en plaçant en parallèle ces serveurs. Avant ceux-ci, un proxy
+permet de distribuer les connexions des utilisateurs parmi eux. Cela garantie
+d'avoir une charge uniforme sur l'ensemble des serveurs. \\
+
+Dans le cas où cette charge est jugé trop importante ou que Aventix souhaite
+augmenter le potentiels de l'application, d'autres serveurs virtuelles sont à
+placer en parallèles derrière le proxy. \\
+
+La machine possédant le proxy doit aussi pouvoir accepter une très forte charge
+de connexion réseau. Ce dernier peut également être multiplié en parallèle afin
+de contenir la demande croissante. \\
+
+Cette remarque est également valable pour le firewall. \\
+
+Les applications sont alors distribués parmi des blocs de serveurs applicatifs.
+Nous avons choisi de placer les applications de gestion des commerçant et des
+entreprises sur le même bloc de serveur. L'application de gestion des clients
+et l'application de transaction ont chacun leur propre bloc de serveur. \\
+
+Cette répartition permet de distribuer manuellement la charge sur différents
+ensembles de machines. Egalement, cela rend les différentes applications
+totalement indépendantes et une grave erreur sur l'une n'aura aucune
+répercution sur les autres. \\
+
+\subsection{Scaling des serveurs de bases de données}
+\label{subsec:scaling-bdd}
 
 \section{Sécurité}
 \label{sec:securite}
