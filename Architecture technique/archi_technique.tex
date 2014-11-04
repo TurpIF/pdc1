@@ -45,51 +45,60 @@ la charge qui lui est soumise.
 \label{sec:Dimensionnement}
 
 Bien que nos perspectives de développement varient grandement suivant l'échéance
-considérée (Confer Business plan), on peut envisager un dimensionnement 
+considérée (Confer Business plan), on peut envisager un dimensionnement
 des besoins immédiats en termes de charge supportée. \\
-Notre stratégie marketing aggressive nous permet de nous positionner, dès notre 
-entrée sur le marché, en tant qu'acteurs majeurs du secteur, avec pas moins de 
-300 000 entreprises clientes, de toutes tailles, ce qui laisse présager aux 
+
+Notre stratégie marketing aggressive nous permet de nous positionner, dès notre
+entrée sur le marché, en tant qu'acteurs majeurs du secteur, avec pas moins de
+300 000 entreprises clientes, de toutes tailles, ce qui laisse présager aux
 alentours de 6 millions de cartes à puce en circulation. \\
+
 Ces cartes pourraient être utilisées sur l'une des 14 500 bornes de paiement mises
 à disposition dans l'un des quelques 4 300 supermarchés et hypermarchés de zone
 urbaine ou périurbaine équipés, ou encore dans un des quelques 50 000 restaurants
 partenaires. \\
-Ces infrastructures et ce modèle de déploiement rapide et massif nous laissent 
+
+Ces infrastructures et ce modèle de déploiement rapide et massif nous laissent
 espérer un volume de transactions quotidien important :
+
 \begin{itemize}
-	\item de l'ordre de 600 000 transactions quotidiennes dans les supermarchés,
-	\item et 1 800 000 transactions dans les diverses enseignes de restauration.
+    \item de l'ordre de 600 000 transactions quotidiennes dans les supermarchés,
+    \item et 1 800 000 transactions dans les diverses enseignes de restauration.
 \end{itemize}
+
 Ces transactions seront bien évidemment concentrées sur quelques heures de pointe.
-On peut attendre 60\% de la charge le midi, contre 30\% le soir et seulement 10\% 
-pour le reste de la journée. Le pic critique serait entre 12h20 et 12h40, où 
-presque 30\% des transactions quotidiennes sont attendues (soient quelques 
-720 000 transactions en seulement 20 minutes). \\
+On peut attendre 60\% de la charge le midi, contre 30\% le soir et seulement 10\%
+pour le reste de la journée. Le pic critique serait entre 12h20 et 12h40, où
+presque 30\% des transactions quotidiennes sont attendues (soient quelques
+720 000 transactions en seulement 20 minutes).
 
 \section{Choix de la solution cloud}
 \label{sec:choix-solution-cloud}
-Chaque transaction pèse au plus 3 KB lors de sa validation. Le stockage, 
+
+Chaque transaction pèse au plus 3 KB lors de sa validation. Le stockage,
 une fois archivé, en est optimisé (sur le modèle du Bitcoin). \\
-Lors du pic quotidien, 720 000 transactions sont attendues en l'espace de 20 
-minutes (1200 secondes), ce qui représente une moyenne de 600 transactions 
-par seconde (note : pour l'estimation de débit, nul besoin de lisser les 
-transactions sur leur durée. Ce calcul sera en revanche nécessaire lors 
+
+Lors du pic quotidien, 720 000 transactions sont attendues en l'espace de 20
+minutes (1200 secondes), ce qui représente une moyenne de 600 transactions
+par seconde (note : pour l'estimation de débit, nul besoin de lisser les
+transactions sur leur durée. Ce calcul sera en revanche nécessaire lors
 de l'estimation du volume de connexions simultanées). \\
+
 Cela représente un besoin en débit de 1 800 KB/s en pointe. \\
 
-Ces besoins en débit, plutôt modestes, nous permettent de nous diriger 
+Ces besoins en débit, plutôt modestes, nous permettent de nous diriger
 vers une architecture fondée sur une forte virtualisation. \\
+
 Pour assurer une meilleure QoS, nos efforts matériels ne seront pas concentrés
 sur une seule machine, mais répartis sur au moins deux machines dans le cloud
 (ce nombre pourra croître à mesure que grandiront nos besoins).
 
 Nous avons opté pour une solution proposée par Amazon (gamme AWS), à savoir deux
-serveurs Linux C3.2xlarge, chacun doté de 8 cœurs, 15GiB de RAM et 2 disques SSD 
+serveurs Linux C3.4xlarge, chacun doté de 8 coeurs, 15GiB de RAM et 2 disques SSD
 de 80GB chacun. Ces serveurs seront situés respectivement à Dublin et Francfort. \\
 
-La faible volumétrie de stockage, à laquelle nous sommes contraints par les 
-enjeux budgétaires soulevés, sera compensée par une délégation de ce rôle à 
+La faible volumétrie de stockage, à laquelle nous sommes contraints par les
+enjeux budgétaires soulevés, sera compensée par une délégation de ce rôle à
 des serveurs physiquement hébergés par nos soins.
 
 \section{Passage à l'échelle (scaling)}
@@ -132,7 +141,7 @@ section {\huge \textbf{TODO}}.
 \label{subsec:securite-trafic}
 
 Le trafic indésirable correspond au trafic qui n'est pas directement lié à
-l'utilisation normale du système. Il peut être utilisé comme attaque visant à 
+l'utilisation normale du système. Il peut être utilisé comme attaque visant à
 exploiter des failles d'autres services présents sur la VM, ou tout
 simplement à réduire la disponibilité du système en multipliant les
 accès (DoS). \\
