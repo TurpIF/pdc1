@@ -9,15 +9,6 @@
 La figure \ref{fig:network} détaille l'architecture technique choisie.
 Cependant, certains points doivent être justifiés ou davantage expliqués.
 
-\begin{landscape}
-  \begin{figure}[htpb]
-      \centering
-      \includegraphics[width=0.7\paperheight]{network}
-      \caption{Schéma général de l'architecture technique choisie}
-      \label{fig:network}
-  \end{figure}
-\end{landscape}
-
 \paragraph{Serveurs applicatifs}
 
 L'accès aux serveurs applicatifs est gouverné par une couche \textbf{firewall}
@@ -43,36 +34,47 @@ De plus, un système de cache est configuré sur les serveurs de bases de donné
 pour réduire la latence due à l'accès au sous-système de base de données, ainsi que
 la charge qui lui est soumise.
 
+\begin{landscape}
+  \begin{figure}[htpb]
+      \centering
+      \includegraphics[height=\textwidth]{network}
+      \caption{Schéma général de l'architecture technique choisie}
+      \label{fig:network}
+  \end{figure}
+\end{landscape}
+
 \section{Dimensionnement}
 \label{sec:Dimensionnement}
 
-Bien que nos perspectives de développement varient grandement suivant l'échéance
-considérée (Confer Business plan), on peut envisager un dimensionnement
-des besoins immédiats en termes de charge supportée. \\
+Bien que nos perspectives de développement varient grandement suivant
+l'échéance considérée (Confer Business plan), on peut envisager un
+dimensionnement des besoins immédiats en termes de charge supportée. \\
 
 Notre stratégie marketing aggressive nous permet de nous positionner, dès notre
 entrée sur le marché, en tant qu'acteurs majeurs du secteur, avec pas moins de
-300 000 entreprises clientes, de toutes tailles, ce qui laisse présager aux
-alentours de 6 millions de cartes à puce en circulation. \\
+\textbf{300 000 entreprises} clientes, de toutes tailles, ce qui laisse
+présager aux alentours de \textbf{6 millions de cartes à puce} en circulation.
+\\
 
-Ces cartes pourraient être utilisées sur l'une des 14 500 bornes de paiement mises
-à disposition dans l'un des quelques 4 300 supermarchés et hypermarchés de zone
-urbaine ou périurbaine équipés, ou encore dans un des quelques 50 000 restaurants
-partenaires. \\
+Ces cartes pourraient être utilisées sur l'une des \textbf{14 500 bornes de
+paiement} mises à disposition dans l'un des quelques \textbf{4 300 supermarchés
+et hypermarchés} de zone urbaine ou périurbaine équipés, ou encore dans un des
+quelques \textbf{50 000 restaurants} partenaires. \\
 
 Ces infrastructures et ce modèle de déploiement rapide et massif nous laissent
 espérer un volume de transactions quotidien important :
 
 \begin{itemize}
-    \item de l'ordre de 600 000 transactions quotidiennes dans les supermarchés,
-    \item et 1 800 000 transactions dans les diverses enseignes de restauration.
+    \item de l'ordre de \textbf{600 000 transactions} quotidiennes dans les supermarchés,
+    \item et \textbf{1 800 000 transactions} dans les diverses enseignes de restauration.
 \end{itemize}
 
 Ces transactions seront bien évidemment concentrées sur quelques heures de pointe.
-On peut attendre 60\% de la charge le midi, contre 30\% le soir et seulement 10\%
-pour le reste de la journée. Le pic critique serait entre 12h20 et 12h40, où
-presque 30\% des transactions quotidiennes sont attendues (soient quelques
-720 000 transactions en seulement 20 minutes).
+On peut attendre \textbf{60\%} de la charge le midi, contre \textbf{30\%} le
+soir et seulement \textbf{10\%} pour le reste de la journée. Le pic critique
+serait entre 12h20 et 12h40, où presque \textbf{30\%} des transactions
+quotidiennes sont attendues (soient quelques 720 000 transactions en seulement
+20 minutes). \\
 
 \section{Choix de la solution cloud}
 \label{sec:choix-solution-cloud}
@@ -81,12 +83,12 @@ Chaque transaction pèse au plus 3 KB lors de sa validation. Le stockage,
 une fois archivé, en est optimisé (sur le modèle du Bitcoin). \\
 
 Lors du pic quotidien, 720 000 transactions sont attendues en l'espace de 20
-minutes (1200 secondes), ce qui représente une moyenne de 600 transactions
+minutes (1 200 secondes), ce qui représente une moyenne de 600 transactions
 par seconde (note : pour l'estimation de débit, nul besoin de lisser les
 transactions sur leur durée. Ce calcul sera en revanche nécessaire lors
 de l'estimation du volume de connexions simultanées). \\
 
-Cela représente un besoin en débit de 1 800 KB/s en pointe. \\
+Cela représente un besoin en débit de \textbf{1 800 KB/s} en pointe. \\
 
 Ces besoins en débit, plutôt modestes, nous permettent de nous diriger
 vers une architecture fondée sur une forte virtualisation. \\
@@ -95,9 +97,10 @@ Pour assurer une meilleure QoS, nos efforts matériels ne seront pas concentrés
 sur une seule machine, mais répartis sur au moins deux machines dans le cloud
 (ce nombre pourra croître à mesure que grandiront nos besoins).
 
-Nous avons opté pour une solution proposée par Amazon (gamme AWS), à savoir deux
-serveurs Linux C3.4xlarge, chacun doté de 8 coeurs, 15GiB de RAM et 2 disques SSD
-de 80GB chacun. Ces serveurs seront situés respectivement à Dublin et Francfort. \\
+Nous avons opté pour une solution proposée par Amazon (gamme AWS), à savoir
+\textbf{deux serveurs Linux C3.4xlarge}, chacun doté de \textbf{8 coeurs},
+\textbf{15GiB de RAM} et \textbf{2 disques SSD de 80GB chacun}. Ces serveurs
+seront situés respectivement à Dublin et Francfort. \\
 
 La faible volumétrie de stockage, à laquelle nous sommes contraints par les
 enjeux budgétaires soulevés, sera compensée par une délégation de ce rôle à
@@ -109,31 +112,32 @@ des serveurs physiquement hébergés par nos soins.
 \subsection{Scaling des serveurs applicatifs}
 \label{subsec:scaling-applicatif}
 
-Les serveurs applicatifs sont disposés sous forme de serveurs virtuelles
+Les serveurs applicatifs sont disposés sous forme de serveurs virtuels
 réparties sur plusieurs machines physiques. La charge importante de requête
-peut être soutenu en plaçant en parallèle ces serveurs. Avant ceux-ci, un proxy
-permet de distribuer les connexions des utilisateurs parmi eux. Cela garantie
-d'avoir une charge uniforme sur l'ensemble des serveurs. \\
+peut être gérée en parallélisant ces serveurs. Avant ceux-ci, un proxy permet
+de distribuer les connexions des utilisateurs parmi eux. Cette solution
+garantira la répartition équitable de la charge parmi l'ensemble des serveurs
+disponibles. \\
 
-Dans le cas où cette charge est jugé trop importante ou que Aventix souhaite
-augmenter le potentiels de l'application, d'autres serveurs virtuelles sont à
-placer en parallèles derrière le proxy. \\
+Dans le cas où cette dépasse la capacité courante, ou encore où Aventix souhaite
+augmenter le potentiel de l'application, d'autres serveurs virtuels pourront
+être placés en parallèles derrière le proxy. \\
 
 La machine possédant le proxy doit aussi pouvoir accepter une très forte charge
 de connexion réseau. Ce dernier peut également être multiplié en parallèle afin
-de contenir la demande croissante. \\
+de contenir la demande croissante. \textbf{Remarque :} c'est également valable
+pour le firewall. \\
 
-Cette remarque est également valable pour le firewall. \\
-
-Les applications sont alors distribués parmi des blocs de serveurs applicatifs.
-Nous avons choisi de placer les applications de gestion des commerçant et des
-entreprises sur le même bloc de serveur. L'application de gestion des clients
-et l'application de transaction ont chacun leur propre bloc de serveur. \\
+Les applications sont alors distribuées parmi des blocs de serveurs
+applicatifs. Nous avons choisi de placer les applications de gestion des
+commerçant et des entreprises sur le même bloc de serveur. L'application de
+gestion des clients et l'application de transaction (dialogue avec les bornes)
+ont chacun leur propre bloc de serveur. \\
 
 Cette répartition permet de distribuer manuellement la charge sur différents
-ensembles de machines. Egalement, cela rend les différentes applications
-totalement indépendantes et une grave erreur sur l'une n'aura aucune
-répercution sur les autres. \\
+ensembles de machines. Également, cela rend les différentes applications
+indépendantes sur le plan de l'infrastructure et une grave erreur sur l'une
+n'aura aucune répercussion sur les autres. \\
 
 \subsection{Scaling des serveurs de bases de données}
 \label{subsec:scaling-bdd}
