@@ -1,4 +1,5 @@
 \input{../header}
+\usepackage{float}
 
 \begin{document}
 
@@ -96,6 +97,11 @@ vers une architecture fondée sur une forte virtualisation. \\
 Pour assurer une meilleure QoS, nos efforts matériels ne seront pas concentrés
 sur une seule machine, mais répartis sur au moins deux machines dans le cloud
 (ce nombre pourra croître à mesure que grandiront nos besoins).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{aws}
+\end{figure}
 
 Nous avons opté pour une solution proposée par Amazon (gamme AWS), à savoir
 \textbf{deux serveurs Linux C3.4xlarge}, chacun doté de \textbf{8 coeurs},
