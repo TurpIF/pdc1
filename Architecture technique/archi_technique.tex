@@ -138,6 +138,26 @@ répercution sur les autres. \\
 \subsection{Scaling des serveurs de bases de données}
 \label{subsec:scaling-bdd}
 
+L'ensemble du groupe servant de serveurs de bases de données est représenté par
+un firewall, un proxy et un ensemble de serveur de données. \\
+
+Le firewall et le proxy sont regroupés dans une même machine. Comme les
+serveurs applicatifs, ces éléments permettent de garantir la sécurité et la
+répartition de la charge sur l'ensemble des serveurs de base de données. \\
+
+Les serveurs de base de données suivent un modèle de réplication multi-maître.
+Plusieurs machines peuvent donc être placé en parallèle afin de supporter une
+grande charge. \\
+
+A l'instar des serveurs applicatifs, une croissance de l'ensemble de
+l'application et donc de la charge globale est possible en rajoutant d'autres
+instances de base de données. \\
+
+Un archivage des données est effectué au fur et à mesure de l'exécution de
+l'application après un certain temps fixé. Pour s'adapter à la quantité de
+mémoire potentiellement importante à stocker lors d'un archivage, de nouveaux
+serveurs de stockage sont à rajouter également au fur et à mesure. \\
+
 \section{Sécurité}
 \label{sec:securite}
 
