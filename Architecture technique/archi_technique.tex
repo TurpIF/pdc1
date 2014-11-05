@@ -119,13 +119,13 @@ des serveurs physiquement hébergés par nos soins.
 \label{subsec:scaling-applicatif}
 
 Les serveurs applicatifs sont disposés sous forme de serveurs virtuels
-réparties sur plusieurs machines physiques. La charge importante de requête
+répartis sur plusieurs machines physiques. La charge importante de requête
 peut être gérée en parallélisant ces serveurs. Avant ceux-ci, un proxy permet
 de distribuer les connexions des utilisateurs parmi eux. Cette solution
 garantira la répartition équitable de la charge parmi l'ensemble des serveurs
 disponibles. \\
 
-Dans le cas où cette dépasse la capacité courante, ou encore où Aventix souhaite
+Dans le cas où on dépasse la capacité courante, ou encore celui où Aventix souhaite
 augmenter le potentiel de l'application, d'autres serveurs virtuels pourront
 être placés en parallèles derrière le proxy. \\
 
@@ -156,7 +156,7 @@ serveurs applicatifs, ces éléments permettent de garantir la sécurité et la
 répartition de la charge sur l'ensemble des serveurs de base de données. \\
 
 Les serveurs de base de données suivent un modèle de réplication multi-maître.
-Plusieurs machines peuvent donc être placé en parallèle afin de supporter une
+Plusieurs machines peuvent donc être placées en parallèle afin de supporter une
 grande charge. \\
 
 A l'instar des serveurs applicatifs, une croissance de l'ensemble de
